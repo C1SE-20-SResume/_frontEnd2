@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
 
-function EditJobDetail({ setShowDetail, id }) {
+function EditJobDetail({setShowDetail, id}) {
   const [cookies, setCookie] = useCookies(["user"]);
 
   const [jobEdit, setJobEdit] = useState({});
@@ -14,11 +14,11 @@ function EditJobDetail({ setShowDetail, id }) {
   ]);
 
   const [listWeight] = useState([
-    { id: 1, name: "Very Low" },
-    { id: 2, name: "Low" },
-    { id: 3, name: "Medium" },
-    { id: 4, name: "High" },
-    { id: 5, name: "Very High" },
+    {id: 1, name: "Very Low"},
+    {id: 2, name: "Low"},
+    {id: 3, name: "Medium"},
+    {id: 4, name: "High"},
+    {id: 5, name: "Very High"},
   ]);
 
   const addKeyword = (e) => {
@@ -27,7 +27,7 @@ function EditJobDetail({ setShowDetail, id }) {
       alert("You can only add 10 keywords");
       return;
     }
-    setListKey([...listKey, { keyword: "", weight: "" }]);
+    setListKey([...listKey, {keyword: "", weight: ""}]);
   };
 
   const removeKeyword = (index) => {
@@ -120,7 +120,7 @@ function EditJobDetail({ setShowDetail, id }) {
               name="job_title"
               value={jobEdit.job_title}
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, job_title: e.target.value })
+                setJobEdit({...jobEdit, job_title: e.target.value})
               }
             />
           </div>
@@ -132,7 +132,7 @@ function EditJobDetail({ setShowDetail, id }) {
               name="job_require"
               value={jobEdit.job_require}
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, job_require: e.target.value })
+                setJobEdit({...jobEdit, job_require: e.target.value})
               }
             />
           </div>
@@ -145,7 +145,7 @@ function EditJobDetail({ setShowDetail, id }) {
               name="job_description"
               value={jobEdit.job_descrip}
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, job_descrip: e.target.value })
+                setJobEdit({...jobEdit, job_descrip: e.target.value})
               }
             />
           </div>
@@ -157,7 +157,7 @@ function EditJobDetail({ setShowDetail, id }) {
               name="job_benefit"
               value={jobEdit.job_benefit}
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, job_benefit: e.target.value })
+                setJobEdit({...jobEdit, job_benefit: e.target.value})
               }
             />
           </div>
@@ -169,7 +169,7 @@ function EditJobDetail({ setShowDetail, id }) {
               name="job_place"
               value={jobEdit.job_place}
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, job_place: e.target.value })
+                setJobEdit({...jobEdit, job_place: e.target.value})
               }
             />
           </div>
@@ -180,9 +180,7 @@ function EditJobDetail({ setShowDetail, id }) {
               type="text"
               name="job_salary"
               value={jobEdit.salary}
-              onChange={(e) =>
-                setJobEdit({ ...jobEdit, salary: e.target.value })
-              }
+              onChange={(e) => setJobEdit({...jobEdit, salary: e.target.value})}
             />
           </div>
           <div className="col-span-1">
@@ -197,7 +195,7 @@ function EditJobDetail({ setShowDetail, id }) {
                   : ""
               }
               onChange={(e) =>
-                setJobEdit({ ...jobEdit, date_expire: e.target.value })
+                setJobEdit({...jobEdit, date_expire: e.target.value})
               }
             />
           </div>

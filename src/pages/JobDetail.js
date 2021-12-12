@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useCookies } from "react-cookie";
-
-function JobDetail({ role }) {
-  const { id } = useParams();
+import React, {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
+import {useCookies} from "react-cookie";
+import {toast} from "react-toastify";
+function JobDetail({role}) {
+  const {id} = useParams();
   const [cookies] = useCookies(["user"]);
 
   const [job, setJob] = useState({});
 
   const [show, setShow] = useState(false);
+  const [getresult, setResult] = useState({});
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/job/${id}`)
@@ -50,7 +52,10 @@ function JobDetail({ role }) {
           //  disable button
 
           setShow(false);
-          alert("Upload CV Success");
+          toast.success("Upload CV Success");
+          setResult(data);
+          setShowResult(true);
+          console.log(data);
         } else {
           alert(data.message);
           window.location.reload();
@@ -76,8 +81,8 @@ function JobDetail({ role }) {
   };
   return (
     <main>
-      <section className="py-10">
-        <div className="container">
+      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+        <div className="container ">
           <div className="text-center mb-6">
             <h2 className="text-2xl mb-4 font-bold">Job Detail</h2>
             <p>
@@ -87,7 +92,7 @@ function JobDetail({ role }) {
           </div>
           <div className="flex">
             <div className="md:w-3/4 w-full mr-5">
-              <div className="shadow-md bg-gray-50 p-5">
+              <div className="shadow-md bg-gray-50 p-5 rounded-lg">
                 <div className="flex">
                   <div>
                     <img
@@ -163,7 +168,7 @@ function JobDetail({ role }) {
               </div>
             </div>
             <div className="md:w-1/4 w-full">
-              <div className="shadow-md bg-gray-100 p-5 mb-6">
+              <div className="shadow-md bg-gray-100 p-5 mb-6 rounded-lg">
                 <h3 className="text-center">
                   <span className="font-bold">Job Detail</span>
                 </h3>
@@ -227,7 +232,63 @@ function JobDetail({ role }) {
                     </span>
                   </div>
                 </div>
+                {showResult && (
+                  <div className="fixed  w-1/3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className=" shadow-md">
+                      <div className="text-left rounded-t-xl  bg-green-400 p-5 ">
+                        <h3 className="font-extrabold text-white text-2xl">
+                          Congratulations
+                        </h3>
+                      </div>
+                      <div className="p-5 2 bg-white flex flex-col justify-center items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-12 w-12 block text-center text-green-400"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <div className="text-center">
+                          <h3 className="font-semibold text-lg">
+                            you have the full criteria to apply to the company
+                          </h3>
+                        </div>
+                        <div className="m-8">
+                          <div className="text-center font-medium text-gray-500">
+                            <p>
+                              Rank : <span>{getresult.rank}</span>{" "}
+                            </p>
+                          </div>
+                          <div className="text-center font-medium text-gray-500">
+                            <p>
+                              Score : <span>{getresult.cv_score}</span>{" "}
+                            </p>
+                          </div>
+                          <div className="text-center font-medium text-gray-500">
+                            <p>
+                              keyword : <span>{getresult.keyword_found}</span>{" "}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="m-8">
+                          <button
+                            onClick={() => setShowResult(false)}
+                            className="rounded-xl py-2 px-5 bg-red-500 text-center text-white font-medium "
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
+
               {role !== 1 && (
                 <div className="shadow-md bg-gray-100 p-5">
                   <button

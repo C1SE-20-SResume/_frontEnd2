@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { Validator } from "../Store";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
+import {Validator} from "../Store";
+import {Link} from "react-router-dom";
 import "../Styles/Login.css";
 
 function Login() {
@@ -59,7 +59,7 @@ function Login() {
   };
 
   return (
-    <div className="w-full h-screen py-10 bg-gray-300 flex justify-center items-center">
+    <div className="w-full h-screen py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 flex justify-center items-center">
       <div className="container">
         <div className="flex flex-col items-center justify-center h-full">
           <div className="w-full max-w-md">

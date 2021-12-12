@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
 
 import EditJobDetail from "./EditJobDetail";
 
@@ -22,6 +22,7 @@ function EditJob() {
             company_name: data.company_name,
             listJob: data.data,
           });
+          console.log(job.listJob);
         }
       })
       .catch((err) => console.log(err));

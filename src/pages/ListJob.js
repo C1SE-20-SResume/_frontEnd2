@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
-function ListJob({ role, title }) {
+function ListJob({role, title}) {
   const [listJob, setListJob] = useState([]);
 
   const [perPage, setPerPage] = useState({
@@ -27,7 +27,7 @@ function ListJob({ role, title }) {
 
   return (
     <main>
-      <section className="py-10">
+      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
         <div className="container">
           <div className="text-center mb-6">
             <h2 className="text-2xl mb-4 font-bold">Available job for you</h2>
@@ -201,9 +201,10 @@ function ListJob({ role, title }) {
                             index % perPage.limit === 0 && (
                               <li
                                 key={index}
-                                className="flex items-center justify-center w-1/6"
+                                className="flex items-center w-auto m-3 justify-center w-1/6"
                               >
                                 <button
+                                  className="inline-block p-3 rounded-lg text-white bg-blue-500"
                                   onClick={() => {
                                     setPerPage((prev) => ({
                                       ...prev,

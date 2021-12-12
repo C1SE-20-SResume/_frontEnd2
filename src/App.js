@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Auth, Main } from "./layouts";
+import React, {useState} from "react";
+import {Auth, Main} from "./layouts";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   BrowserRouter,
 } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import {useCookies} from "react-cookie";
 import {
   Home,
   ListJob,
@@ -16,7 +16,9 @@ import {
   Recruiter,
   VerifyNotice,
 } from "./pages";
-import { Login, Register } from "./auth";
+import {Login, Register} from "./auth";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [cookies] = useCookies(["user"]);
@@ -61,16 +63,13 @@ function App() {
 
                 {cookies.user && (
                   <Route exact path="/profile">
-                    <Profile userInfo={{ ...userInfo }} title="Profile" />
+                    <Profile userInfo={{...userInfo}} title="Profile" />
                   </Route>
                 )}
 
                 {cookies.user && (
                   <Route exact path="/for-recruiter">
-                    <Recruiter
-                      userInfo={{ ...userInfo }}
-                      title="For Recruiter"
-                    />
+                    <Recruiter userInfo={{...userInfo}} title="For Recruiter" />
                   </Route>
                 )}
                 <Route exact>
@@ -80,6 +79,19 @@ function App() {
             </Main>
           </Route>
         </Switch>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

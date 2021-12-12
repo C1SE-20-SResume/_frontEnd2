@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
-import { ProfileTab, PasswordTab } from "../components";
+import {ProfileTab, PasswordTab} from "../components";
 
-function Profile({ userInfo, title }) {
+function Profile({userInfo, title}) {
   const [user, setUser] = useState({
-    info: { ...userInfo.user_info },
+    info: {...userInfo.user_info},
     role: userInfo.role_level,
     user_id: userInfo.user_id,
   });
@@ -41,7 +41,7 @@ function Profile({ userInfo, title }) {
 
   return (
     <main>
-      <section className="py-10">
+      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
         <div className="container">
           <div className="text-center mb-6">
             <h2 className="text-2xl mb-4 font-bold">Your Profile</h2>
@@ -49,7 +49,7 @@ function Profile({ userInfo, title }) {
           </div>
           <div className="flex">
             <div className="w-full md:w-1/4">
-              <div className="p-4 shadow-md bg-gray-50">
+              <div className="p-4 shadow-md bg-gray-50 rounded-lg">
                 <div className="mb-4">
                   <img
                     // random user image
@@ -64,7 +64,7 @@ function Profile({ userInfo, title }) {
                 <ul className="block my-5">
                   <li className="">
                     <button
-                      className={`py-2 px-3 flex items-center w-full hover:bg-gray-400 transition duration-300 ${
+                      className={`py-2 px-3 rounded-lg flex items-center w-full hover:bg-gray-400 transition duration-300 ${
                         tab === "profile" ? "bg-gray-400" : ""
                       }`}
                       onClick={() => tabChange("profile")}
@@ -88,7 +88,7 @@ function Profile({ userInfo, title }) {
                   </li>
                   <li className="">
                     <button
-                      className={`py-2 px-3 flex items-center w-full hover:bg-gray-400 transition duration-300 ${
+                      className={`py-2 px-3 rounded-lg flex items-center w-full hover:bg-gray-400 transition duration-300 ${
                         tab === "change-password" ? "bg-gray-400" : ""
                       }`}
                       onClick={() => tabChange("change-password")}
@@ -114,7 +114,7 @@ function Profile({ userInfo, title }) {
               </div>
             </div>
             <div className="w-full md:w-3/4">
-              <div className="p-5 mx-4 shadow-md bg-gray-100">
+              <div className="p-5 mx-4 shadow-md bg-gray-100 rounded-lg">
                 {renderTab()}
               </div>
             </div>

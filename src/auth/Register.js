@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import validator from "validator";
 
 function Register() {
@@ -110,7 +110,7 @@ function Register() {
   };
 
   return (
-    <div className="w-full h-screen py-10 bg-gray-300 flex justify-center items-center relative">
+    <div className="w-full h-screen py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 flex justify-center items-center relative">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="min-w-[500px] max-w-md">
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">

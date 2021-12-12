@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   ListJob,
   AddJob,
@@ -7,9 +7,9 @@ import {
   ListQuestion,
 } from "../components";
 
-function Recruiter({ userInfo, title }) {
+function Recruiter({userInfo, title}) {
   const [user, setUser] = useState({
-    info: { ...userInfo.user_info },
+    info: {...userInfo.user_info},
     role: userInfo.role_level,
     user_id: userInfo.user_id,
   });
@@ -50,7 +50,7 @@ function Recruiter({ userInfo, title }) {
 
   return (
     <main>
-      <section className="py-10">
+      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
         <div className="container">
           <div className="text-center mb-6">
             <h2 className="text-2xl mb-4 font-bold">Your Profile</h2>
