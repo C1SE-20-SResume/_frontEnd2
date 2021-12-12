@@ -19,6 +19,7 @@ import {
 import {Login, Register} from "./auth";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dialog from "./pages/Dialog";
 
 function App() {
   const [cookies] = useCookies(["user"]);
@@ -92,6 +93,7 @@ function App() {
         />
 
         <ToastContainer />
+        {/* <Dialog /> */}
       </BrowserRouter>
     </>
   );

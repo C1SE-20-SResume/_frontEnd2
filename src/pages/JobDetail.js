@@ -232,30 +232,57 @@ function JobDetail({role}) {
                     </span>
                   </div>
                 </div>
+
                 {showResult && (
                   <div className="fixed  w-1/3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <div className=" shadow-md">
-                      <div className="text-left rounded-t-xl  bg-green-400 p-5 ">
+                      <div
+                        className={`${
+                          getresult.cv_pass === 1
+                            ? "bg-green-400"
+                            : "bg-yellow-500"
+                        }    text-left rounded-t-xl   p-5`}
+                      >
                         <h3 className="font-extrabold text-white text-2xl">
-                          Congratulations
+                          {getresult.cv_pass === 1
+                            ? "Congratulations!"
+                            : "Please be patient !"}{" "}
                         </h3>
                       </div>
                       <div className="p-5 2 bg-white flex flex-col justify-center items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-12 w-12 block text-center text-green-400"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                        {getresult.cv_pass === 1 ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-12 w-12 block text-center text-green-400"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-12 w-12 block text-center text-yellow-500"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-7.536 5.879a1 1 0 001.415 0 3 3 0 014.242 0 1 1 0 001.415-1.415 5 5 0 00-7.072 0 1 1 0 000 1.415z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
+
                         <div className="text-center">
                           <h3 className="font-semibold text-lg">
-                            you have the full criteria to apply to the company
+                            {getresult.cv_pass === 1
+                              ? "Your CV has been prioritized. Please wait, the recruiter will contact you as soon as possible. Thank you!"
+                              : "Your CV has not been prioritized, but don't worry, you wait for the recruiter to contact you as soon as possible. Thank you!"}
                           </h3>
                         </div>
                         <div className="m-8">
@@ -271,7 +298,8 @@ function JobDetail({role}) {
                           </div>
                           <div className="text-center font-medium text-gray-500">
                             <p>
-                              keyword : <span>{getresult.keyword_found}</span>{" "}
+                              keyword was found :{" "}
+                              <span>{getresult.keyword_found + "  "}</span>{" "}
                             </p>
                           </div>
                         </div>
