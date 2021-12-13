@@ -3,11 +3,37 @@ import {useCookies} from "react-cookie";
 import {Validator} from "../Store";
 import {Link} from "react-router-dom";
 import "../Styles/Login.css";
-
+import Forgotpass from "./Forgotpass";
+import {useForm} from "react-hook-form";
+import {toast} from "react-toastify";
 function Login() {
   const [cookies, setCookie] = useCookies(["user"]);
 
   const [message, setMessage] = useState("");
+  const [show, setShow] = useState(false);
+  const {register, handleSubmit, errors} = useForm();
+  const onSubmit = (data) => {
+    fetch(`${process.env.REACT_APP_API_URL}/password/forgot`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.emailForgotPass,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+        } else {
+          toast.error(data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     Validator({
@@ -25,7 +51,7 @@ function Login() {
     });
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmitLogin = (event) => {
     console.log(message);
     event.preventDefault();
     const email = event.target.email.value;
@@ -67,7 +93,7 @@ function Login() {
               <div className="mb-4">
                 <h1 className="text-center text-2xl font-bold">Login</h1>
               </div>
-              <form className="" onSubmit={handleSubmit} id="formLogin">
+              <form className="" onSubmit={handleSubmitLogin} id="formLogin">
                 <div className="mb-4 form-group">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     Email
@@ -112,17 +138,85 @@ function Login() {
                       <span>Sign Up</span>
                     </Link>
                   </div>
-                  <a
+                  <button
                     className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                    href="/"
+                    onClick={() => setShow(true)}
+                    type="button"
                   >
                     Forgot Password?
-                  </a>
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
+        {show ? (
+          <div className="fixed shadow-2xl rounded-lg bg-gray-200 p-5  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <button
+              onClick={() => setShow(false)}
+              className="absolute top-0 right-0 p-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-red-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="mb-5 text-left">
+                <h3 className="text-black text-lg font-bold">
+                  Forgot password
+                </h3>
+              </div>
+              <div className="mb-5">
+                <label className="mr-3 font-medium">Email</label>
+                <input
+                  type="email"
+                  name="emailForgotPass"
+                  placeholder="Enter your email"
+                  ref={register({
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Email invalid (abc@xyz.qwe) ",
+                    },
+                  })}
+                  className="px-3 py-2 rounded-lg"
+                />
+                {errors.emailForgotPass && (
+                  <span
+                    className="text-red-500 text-xs block mt-2"
+                    id="errors-msg-register"
+                  >
+                    <ion-icon
+                      id="errors-msg-register"
+                      name="warning"
+                    ></ion-icon>
+                    {errors.emailForgotPass?.message}
+                  </span>
+                )}
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="px-3 py-1 bg-blue-500 text-white rounded-lg"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       <Link
         to="/home"

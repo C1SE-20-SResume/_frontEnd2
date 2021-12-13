@@ -300,6 +300,7 @@ function ListJob() {
                       </th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {results && results.length > 0 ? (
                       results.map((item, index) => (

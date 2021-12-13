@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useCookies} from "react-cookie";
+import Dialog from "../../pages/Dialog";
 
 import EditJobDetail from "./EditJobDetail";
 
@@ -10,6 +11,16 @@ function EditJob() {
   const [showDetail, setShowDetail] = useState(false);
 
   const [idJob, setIdJob] = useState("");
+  const [showTaskDialog, setShowTaskdialog] = useState(false);
+  const confirm = () => {
+    console.log("abc");
+
+    return;
+  };
+  const cancel = () => {
+    setShowTaskdialog(false);
+    return;
+  };
 
   useEffect(() => {
     fetch(
@@ -46,6 +57,14 @@ function EditJob() {
   };
   return (
     <>
+      <div
+        onClick={() => {
+          setShowTaskdialog(true);
+        }}
+        className="text-white bg-blue-400 px-4 py-2 rounded-lg mx-2 hover:bg-blue-600"
+      >
+        BUTTON
+      </div>
       <div className="m-2 relative">
         <h2 className="text-xl mb-4">
           <span className="font-bold">
@@ -142,6 +161,13 @@ function EditJob() {
         ) : (
           <EditJobDetail setShowDetail={setShowDetail} id={idJob} />
         )}
+        <Dialog
+          show={showTaskDialog}
+          title="Delete"
+          description="Are you sure you want to delete ?"
+          confirm={confirm}
+          cancel={cancel}
+        />
       </div>
     </>
   );
