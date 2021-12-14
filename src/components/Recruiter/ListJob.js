@@ -78,7 +78,7 @@ function ListJob() {
           {job.company_name ? job.company_name : "Loading..."}
         </span>
         {` - `}
-        <span className="font-bold">List Job</span>
+        <span className="font-bold">Job Alert</span>
       </h2>
       <hr />
       <div className="grid grid-cols-3 gap-4 my-4">

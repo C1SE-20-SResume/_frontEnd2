@@ -57,14 +57,14 @@ function EditJob() {
   };
   return (
     <>
-      <div
+      {/* <div
         onClick={() => {
           setShowTaskdialog(true);
         }}
         className="text-white bg-blue-400 px-4 py-2 rounded-lg mx-2 hover:bg-blue-600"
       >
         BUTTON
-      </div>
+      </div> */}
       <div className="m-2 relative">
         <h2 className="text-xl mb-4">
           <span className="font-bold">
