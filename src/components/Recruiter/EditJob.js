@@ -24,7 +24,7 @@ function EditJob() {
 
   useEffect(() => {
     fetch(
-      `${process.env.REACT_APP_API_URL}/recruiter/apply?api_token=${cookies.user}`
+      `${process.env.REACT_APP_API_URL}/recruiter/job/view?api_token=${cookies.user}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -33,14 +33,14 @@ function EditJob() {
             company_name: data.company_name,
             listJob: data.data,
           });
-          console.log(job.listJob);
+          console.log("check", data.data);
         }
       })
       .catch((err) => console.log(err));
   }, [cookies.user]);
 
   const handleDetroyJob = (id) => {
-    const check = window.confirm("Are you sure you want to delete this job?");
+    const check = window.confirm("Are you sure you want to close this job?");
     if (check) {
       fetch(
         `${process.env.REACT_APP_API_URL}/recruiter/job/close/${id}?api_token=${cookies.user}`
@@ -65,7 +65,7 @@ function EditJob() {
       >
         BUTTON
       </div> */}
-      <div className="m-2 relative">
+      <div className="m-2 relative menu-func-recruiter">
         <h2 className="text-xl mb-4">
           <span className="font-bold">
             {job.company_name ? job.company_name : "Loading..."}
@@ -89,7 +89,7 @@ function EditJob() {
               <tbody>
                 {job && job.listJob && job.listJob.length > 0 ? (
                   job.listJob.map((item) => (
-                    <tr key={item.job_id}>
+                    <tr key={item.id}>
                       <td className="border px-4 py-2 capitalize">
                         {item.job_title}
                       </td>
@@ -102,7 +102,7 @@ function EditJob() {
                         <button
                           className="hover:text-prihover mx-1 hover:scale-110"
                           onClick={() => {
-                            setIdJob(item.job_id);
+                            setIdJob(item.id);
                             setShowDetail(true);
                           }}
                         >
@@ -126,7 +126,7 @@ function EditJob() {
                             className="hover:text-red-500 mx-1 hover:scale-110"
                             onClick={(e) => {
                               e.preventDefault();
-                              handleDetroyJob(item.job_id);
+                              handleDetroyJob(item.id);
                             }}
                           >
                             <svg

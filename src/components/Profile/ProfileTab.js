@@ -1,13 +1,45 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {useForm} from "react-hook-form";
+import {useCookies} from "react-cookie";
+function ProfileTab({user}) {
+  const [cookies, setCookie] = useCookies(["user"]);
+  const {register, handleSubmit, errors} = useForm();
 
-function ProfileTab({ user }) {
+  const onSubmit = (data) => {
+    console.log(data);
+
+    let form = new FormData();
+    form.append("full_name", data.fullname);
+    form.append("gender", data.gioitinh);
+    form.append("date_birth", data.birthday);
+    form.append("phone_number", data.phone_number);
+    form.append("company_name", data.companyname);
+    form.append("logo_url", data.logourl);
+
+    fetch(
+      `${process.env.REACT_APP_API_URL}/user/profile?api_token=${cookies.user}`,
+      {
+        method: "POST",
+        body: form,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert(data.message);
+          window.location.reload();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className="m-2">
+    <div className=" m-2 menu-func-recruiter ">
       <h2 className="text-xl mb-4">
         <span className="font-bold">Profile</span>
       </h2>
       <hr />
-      <form className="mb-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
         <div className="grid grid-cols-2 gap-4 mb-6">
           <div className="col-span-1 mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -19,8 +51,49 @@ function ProfileTab({ user }) {
               placeholder="Your Name"
               name="fullname"
               defaultValue={user.info.full_name}
+              ref={register}
             />
           </div>
+          {user.info.company_name ? (
+            <>
+              <div className="col-span-1 mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Company Name
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="text"
+                  placeholder="company name"
+                  name="companyname"
+                  defaultValue={user.info.company_name}
+                  ref={register}
+                />
+              </div>
+              <div className="col-span-1 mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Url logo
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="text"
+                  placeholder="company name"
+                  name="logourl"
+                  defaultValue={user.info.logo_url}
+                  ref={register}
+                />
+              </div>
+              <div className=" flex justify-center col-span-1 mb-4">
+                <img
+                  className="w-36 border-black border-collapse"
+                  src={user.info.logo_url}
+                  alt=""
+                />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+
           <div className="col-span-1 2 mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Your Email
@@ -30,6 +103,7 @@ function ProfileTab({ user }) {
               type="email"
               name="email"
               defaultValue={user.info.email}
+              ref={register}
               disabled
             />
           </div>
@@ -41,6 +115,7 @@ function ProfileTab({ user }) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               name="phone_number"
+              ref={register}
               defaultValue={user.info.phone_number}
             />
           </div>
@@ -52,6 +127,7 @@ function ProfileTab({ user }) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="date"
               name="birthday"
+              ref={register}
               defaultValue={user.info.date_birth}
             />
           </div>
@@ -59,7 +135,12 @@ function ProfileTab({ user }) {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Gender
             </label>
-            <select className="w-full p-2 rounded-md ">
+            <select
+              ref={register}
+              name="gioitinh"
+              defaultValue={user.info.gender}
+              className="w-full p-2 rounded-md "
+            >
               <option value="f">Female</option>
               <option value="m">Male</option>
               <option value="o">Another</option>
@@ -67,8 +148,11 @@ function ProfileTab({ user }) {
           </div>
         </div>
         <div className="text-center">
-          <button className="py-2 px-4 bg-blue-500 border border-blue-500  hover:bg-white hover:text-blue-500 text-white font-bold rounded-lg">
-            <span className="font-bold">Update</span>
+          <button
+            type="submit"
+            className="py-2 px-4 bg-indigo-600 border border-indigo-600  hover:bg-white hover:text-indigo-600 text-white font-bold rounded-lg"
+          >
+            <span className="font-bold ">Update</span>
           </button>
         </div>
       </form>

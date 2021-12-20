@@ -4,218 +4,110 @@ import Logo from "../assets/images/logo.png";
 function Footer() {
   return (
     <>
-      <footer className="footer-1 bg-gray-100 py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div className="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6">
-              <h5 className="text-xl font-bold mb-6">Features</h5>
-              <ul className="list-none footer-links">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Cool stuff
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Random feature
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Team feature
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Stuff for developers
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Another one
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Last time
-                  </a>
-                </li>
-              </ul>
+      <div className="footer-2 bg-gray-200 pt-6 md:pt-12">
+        <div className="container px-4 mx-auto">
+          <div className="md:flex md:flex-wrap md:-mx-4 py-6 md:pb-12">
+            <div className="footer-info lg:w-1/3 md:px-4">
+              <img src={Logo} className="w-40" />
+              <p className="text-gray-400 my-3">
+                We have carefully crafted the blocks to suit to everyone's need.
+              </p>
+              <div className>
+                <button className="bg-facebook py-2 px-4 text-white rounded mt-2 transition-colors duration-300">
+                  <span className="fab fa-facebook-f mr-2" /> Follow
+                </button>
+              </div>
             </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 sm:mt-0">
-              <h5 className="text-xl font-bold mb-6">Lorem</h5>
-              <ul className="list-none footer-links">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    distinctio
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Lorem ipsum
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Corporis
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Final totam
-                  </a>
-                </li>
-              </ul>
+            <div className="lg:w-1/3 md:px-4">
+              <div className="sm:flex text-left ">
+                <div className="sm:flex-1 mt-4  sm:mt-0">
+                  <h6 className="text-base font-bold text-black uppercase mb-2">
+                    Member
+                  </h6>
+                  <div>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Phan Duong Ngoc Do
+                    </span>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Nguyen Diem Hanh
+                    </span>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Nguyen Ngoc Thanh
+                    </span>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Dam Duc Manh
+                    </span>
+                  </div>
+                </div>
+                <div className="sm:flex-1 mt-4 px-3 box-border sm:mt-0">
+                  <h6 className="text-base font-bold text-black uppercase mb-2">
+                    Mentor
+                  </h6>
+                  <div>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Nguyen Duc Man
+                    </span>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Ho Tan Dat
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0">
-              <h5 className="text-xl font-bold mb-6">About</h5>
-              <ul className="list-none footer-links">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Team
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Locations
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Privacy
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Terms
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 xl:w-1/6 mt-8 md:mt-0">
-              <h5 className="text-xl font-bold mb-6">Help</h5>
-              <ul className="list-none footer-links">
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Support
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Help Center
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a
-                    href="#"
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="px-4 mt-4 sm:w-1/3 xl:w-1/6 sm:mx-auto xl:mt-0 xl:ml-auto">
-              <h5 className="text-xl font-bold mb-6 sm:text-center xl:text-left">
-                Stay connected
+            <div className="md:w-1/3 md:px-4 md:text-center mt-12 lg:mt-0">
+              <h5 className="text-lg text-black font-medium mb-4">
+                Want to post a job? Contact us at:
               </h5>
-              <div className="flex sm:justify-center xl:justify-start">
+              <span
+                href="#"
+                className="text-gray-400 py-1 block hover:underline"
+              >
+                Da Nang: (+84) 966529474 <br /> Email: sresume@cvtojob.tk
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-solid border-gray-900 mt-4 py-4">
+          <div className="container px-4 mx-auto">
+            <div className="md:flex md:-mx-4 md:items-center">
+              <div className="md:flex-1 md:px-4 text-center md:text-left">
+                <p className="text-black">
+                  © <strong>SRESUME</strong>
+                </p>
+              </div>
+              <div className="md:flex-1 md:px-4 text-center md:text-right">
+                <span className="py-2 px-4 text-black font-semibold text-xs inline-block ">
+                  CAPSTONE 1
+                </span>
                 <a
-                  href
-                  className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 text-gray-600 hover:text-white hover:bg-blue-600 hover:border-blue-600"
+                  href="#"
+                  className="py-2 px-4 text-black font-semibold text-xs inline-block"
                 >
-                  <i className="fab fa-facebook" />
-                </a>
-                <a
-                  href
-                  className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-blue-400 hover:border-blue-400"
-                >
-                  <i className="fab fa-twitter" />
-                </a>
-                <a
-                  href
-                  className="w-8 h-8 border border-2 border-gray-400 rounded-full text-center py-1 ml-2 text-gray-600 hover:text-white hover:bg-red-600 hover:border-red-600"
-                >
-                  <i className="fab fa-google-plus-g" />
+                  Duy Tan Unieversity
                 </a>
               </div>
             </div>
           </div>
-          <div className="sm:flex sm:flex-wrap sm:-mx-4 mt-6 pt-6 sm:mt-12 sm:pt-12 border-t">
-            <div className="sm:w-full px-4 md:w-1/6">
-              <strong>SRESUME</strong>
-            </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 mt-4 md:mt-0">
-              <h6 className="font-bold mb-2">Member C1SE.20</h6>
-              <address className="not-italic mb-4 text-sm">
-                <p className="mb-2 text-sm">Phan Duong Ngoc Do</p>
-                <p className="mb-2 text-sm">Nguyen Ngoc Thanh</p>
-                <p className="mb-2 text-sm">Ngo Van Lam Truong</p>
-                <p className="mb-2 text-sm">Nguyen Thi Diem Hanh</p>
-                <p className="mb-2 text-sm">Dam Phuoc Manh</p>
-              </address>
-            </div>
-            <div className="px-4 sm:w-1/2 md:w-1/4 mt-4 md:mt-0">
-              <h6 className="font-bold mb-2">Mentor</h6>
-              <p className="mb-2 text-sm">Nguyen Duc Man</p>
-              <p className="mb-2 text-sm">Ho Tan Dat</p>
-            </div>
-            <div className="px-4 md:w-1/4 md:ml-auto mt-6 sm:mt-4 md:mt-0">
-              <button className="px-4 py-2 bg-purple-800 hover:bg-purple-900 rounded text-white">
-                Get Started
-              </button>
-            </div>
-          </div>
         </div>
-      </footer>
+      </div>
     </>
   );
 }

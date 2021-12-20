@@ -88,7 +88,7 @@ function EditJobDetail({setShowDetail, id}) {
       .catch((err) => console.log(err));
   }, [id]);
   return (
-    <div className="mt-6">
+    <div className="menu-func-recruiter mt-6">
       <div className="mb-2">
         <button
           className="hover:translate-x-1"
@@ -112,7 +112,7 @@ function EditJobDetail({setShowDetail, id}) {
       </div>
       <form className="my-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Title</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -124,9 +124,10 @@ function EditJobDetail({setShowDetail, id}) {
               }
             />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Require</label>
-            <input
+            <textarea
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               name="job_require"
@@ -141,6 +142,7 @@ function EditJobDetail({setShowDetail, id}) {
               Job Description
             </label>
             <textarea
+              rows={10}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               name="job_description"
               value={jobEdit.job_descrip}
@@ -149,9 +151,10 @@ function EditJobDetail({setShowDetail, id}) {
               }
             />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Benefit</label>
-            <input
+            <textarea
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               name="job_benefit"
@@ -199,6 +202,15 @@ function EditJobDetail({setShowDetail, id}) {
               }
             />
           </div>
+          <div className="col-span-1">
+            <label className="block text-sm font-bold mb-2">Work time</label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              name="date_expire"
+              defaultValue="Fulltime"
+            />
+          </div>
           {listKey.length > 0 &&
             listKey.map((item, index) => (
               <div key={index} className="col-span-2">
@@ -232,11 +244,20 @@ function EditJobDetail({setShowDetail, id}) {
                       <option value="java" className="capitalize">
                         java
                       </option>
+                      <option value="java" className="capitalize">
+                        javascript
+                      </option>
                       <option value="php" className="capitalize">
                         php
                       </option>
                       <option value="python" className="capitalize">
                         python
+                      </option>
+                      <option value="python" className="capitalize">
+                        ruby
+                      </option>
+                      <option value="python" className="capitalize">
+                        sql
                       </option>
                       <option value="swift" className="capitalize">
                         swift
@@ -244,8 +265,11 @@ function EditJobDetail({setShowDetail, id}) {
                       <option value="c#" className="capitalize">
                         c#
                       </option>
-                      <option value="objectC" className="capitalize">
-                        object-C
+                      <option value="c" className="capitalize">
+                        C
+                      </option>
+                      <option value="c++" className="capitalize">
+                        C++
                       </option>
                       <option value="dart" className="capitalize">
                         dart
@@ -264,6 +288,39 @@ function EditJobDetail({setShowDetail, id}) {
                       </option>
                       <option value="vuejs" className="capitalize">
                         vuejs
+                      </option>
+                      <option value="asp.net" className="capitalize">
+                        asp.net
+                      </option>
+                      <option value=".net" className="capitalize">
+                        .net
+                      </option>
+                      <option value="react native" className="capitalize">
+                        react native
+                      </option>
+                      <option value="flutter" className="capitalize">
+                        flutter
+                      </option>
+                      <option value="kotlin" className="capitalize">
+                        kotlin
+                      </option>
+                      <option value="golang" className="capitalize">
+                        golang
+                      </option>
+                      <option value="Django" className="capitalize">
+                        Django
+                      </option>
+                      <option value="html" className="capitalize">
+                        html
+                      </option>
+                      <option value="css" className="capitalize">
+                        css
+                      </option>
+                      <option value="tailwind" className="capitalize">
+                        tailwind
+                      </option>
+                      <option value="bootstrap" className="capitalize">
+                        bootstrap
                       </option>
                     </select>
                   </div>

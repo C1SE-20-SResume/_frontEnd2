@@ -6,6 +6,7 @@ import "../Styles/Login.css";
 import Forgotpass from "./Forgotpass";
 import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
+import Logo2 from "../assets/images/logo2.png";
 function Login() {
   const [cookies, setCookie] = useCookies(["user"]);
 
@@ -85,13 +86,48 @@ function Login() {
   };
 
   return (
-    <div className="w-full h-screen py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 flex justify-center items-center">
+    <div
+      id="bg-login"
+      className="w-full h-screen py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 flex justify-center items-center"
+    >
       <div className="container">
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex  items-center justify-center h-full">
+          <div className="text-left p-8">
+            <img className="w-80 mb-3" src={Logo2} alt="logo" />
+            <h3 className="text-3xl mb-3 uppercase  ml-2 text-white font-semibold">
+              Login To You Now
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 inline-block mx-3 animate-bounce"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </h3>
+            <p className="mb-3 text-white text-base ml-2">
+              Quickly become a member of your favorite company.
+              <br /> Please login to the system to be able to do it! good luck
+            </p>
+          </div>
           <div className="w-full max-w-md">
             <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
               <div className="mb-4">
                 <h1 className="text-center text-2xl font-bold">Login</h1>
+
+                <span
+                  className={`text-red-500 mt-2  block py-3 px-5 text-center text-sm  ${
+                    message !== "" ? "bg-red-300 text-red-600 " : ""
+                  }`}
+                >
+                  {message !== "" && message}
+                </span>
               </div>
               <form className="" onSubmit={handleSubmitLogin} id="formLogin">
                 <div className="mb-4 form-group">
@@ -106,9 +142,6 @@ function Login() {
                   />
 
                   <span className="form-message text-red-500 text-sm"></span>
-                  <span className="text-red-500 text-sm">
-                    {message !== "" && message}
-                  </span>
                 </div>
                 <div className="mb-4 form-group">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -151,7 +184,7 @@ function Login() {
           </div>
         </div>
         {show ? (
-          <div className="fixed shadow-2xl rounded-lg bg-gray-200 p-5  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="fixed shadow-2xl  rounded-lg bg-gray-200 p-5  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <button
               onClick={() => setShow(false)}
               className="absolute top-0 right-0 p-1"

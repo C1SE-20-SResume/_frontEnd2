@@ -11,6 +11,7 @@ function ListJob({role, title}) {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetch(`${process.env.REACT_APP_API_URL}/job`)
       .then((res) => res.json())
       .then((data) => {
@@ -27,10 +28,12 @@ function ListJob({role, title}) {
 
   return (
     <main>
-      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+      <section className="py-10 ">
         <div className="container">
           <div className="text-center mb-6">
-            <h2 className="text-2xl mb-4 font-bold">Available job for you</h2>
+            <h2 className="text-2xl mb-4 font-bold">
+              Available <span className="text-indigo-600">Jobs</span> For You
+            </h2>
             <p>
               Post a job to tell us about your project. We'll quickly match you
               with the right freelancers.
@@ -47,7 +50,7 @@ function ListJob({role, title}) {
                       index < perPage.max &&
                       index >= perPage.min && (
                         <Link to={`/job/${job.job_id}`} key={index}>
-                          <div className="p-6 mb-6 shadow-md rounded-lg bg-gray-100">
+                          <div className=" menu-func-recruiter p-3 mb-6 shadow-md rounded-lg bg-gray-100 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-red-500  hover:text-white duration-300">
                             <div className="flex items-center justify-between">
                               <div className="flex items-center">
                                 <img
@@ -192,17 +195,14 @@ function ListJob({role, title}) {
                   })}
                 {listJob.length > 0 && (
                   <nav>
-                    <ul className="w-full flex">
+                    <ul className="w-full flex justify-center">
                       {
                         // pagination follow per page
                         listJob.map((job, index) => {
                           let page = Math.floor(index / perPage.limit) + 1;
                           return (
                             index % perPage.limit === 0 && (
-                              <li
-                                key={index}
-                                className="flex items-center w-auto m-3 justify-center w-1/6"
-                              >
+                              <li key={index} className="m-2">
                                 <button
                                   className="inline-block p-3 rounded-lg text-white bg-blue-500"
                                   onClick={() => {
@@ -211,6 +211,7 @@ function ListJob({role, title}) {
                                       min: (page - 1) * perPage.limit,
                                       max: page * perPage.limit,
                                     }));
+                                    window.scrollTo(0, 0);
                                   }}
                                 >
                                   {page}

@@ -41,13 +41,15 @@ function Profile({userInfo, title}) {
 
   return (
     <main>
-      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+      <section className="py-10 ">
         <div className="container">
           <div className="text-center mb-6">
-            <h2 className="text-2xl mb-4 font-bold">Your Profile</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <h2 className="text-2xl mb-4 font-bold">
+              Your <span className="text-indigo-600">Profile</span>
+            </h2>
+            <p>You can edit your personal information here.</p>
           </div>
-          <div className="flex">
+          <div className="flex shadow-2xl">
             <div className="w-full md:w-1/4">
               <div className="p-4 shadow-md bg-gray-50 rounded-lg">
                 <div className="mb-4">
@@ -62,10 +64,10 @@ function Profile({userInfo, title}) {
                   <span className="font-semibold">{user.info.full_name}</span>
                 </h3>
                 <ul className="block my-5">
-                  <li className="">
+                  <li className="mb-2">
                     <button
-                      className={`py-2 px-3 rounded-lg flex items-center w-full hover:bg-gray-400 transition duration-300 ${
-                        tab === "profile" ? "bg-gray-400" : ""
+                      className={`py-2 px-3 rounded-lg flex items-center w-full rounded-lg hover:bg-green-400 hover:rounded-lg transition duration-300 ${
+                        tab === "profile" ? "bg-green-400 text-white" : ""
                       }`}
                       onClick={() => tabChange("profile")}
                     >
@@ -88,8 +90,10 @@ function Profile({userInfo, title}) {
                   </li>
                   <li className="">
                     <button
-                      className={`py-2 px-3 rounded-lg flex items-center w-full hover:bg-gray-400 transition duration-300 ${
-                        tab === "change-password" ? "bg-gray-400" : ""
+                      className={`py-2 px-3 rounded-lg flex items-center w-full rounded-lg hover:bg-green-400 hover:rounded-lg transition duration-300 ${
+                        tab === "change-password"
+                          ? "bg-green-400 text-white"
+                          : ""
                       }`}
                       onClick={() => tabChange("change-password")}
                     >

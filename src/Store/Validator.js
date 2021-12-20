@@ -107,7 +107,7 @@ Validator.isRequired = (selector, message) => {
   return {
     selector: selector,
     test: (value) => {
-      return value.trim() ? undefined : message || "Vui lòng nhập trường này";
+      return value.trim() ? undefined : message || "Required";
     },
   };
 };
@@ -117,7 +117,7 @@ Validator.isEmail = (selector, message) => {
     selector: selector,
     test: (value) => {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return regex.test(value) ? undefined : message || "Email không hợp lệ";
+      return regex.test(value) ? undefined : message || "Invalid email address";
     },
   };
 };
@@ -128,7 +128,7 @@ Validator.minLength = (selector, min, message) => {
     test: (value) => {
       return value.length >= min
         ? undefined
-        : message || `Vui lòng nhập tối thiểu ${min} ký tự`;
+        : message || `Minimum required ${min} characters `;
     },
   };
 };
@@ -139,7 +139,7 @@ Validator.isConfirmation = (selector, getConfirmValue, message) => {
     test: (value) => {
       return value === getConfirmValue()
         ? undefined
-        : message || "Giá trị nhập vào không chính xác";
+        : message || "Input value is incorrect";
     },
   };
 };

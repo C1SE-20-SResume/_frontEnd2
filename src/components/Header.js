@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { Link, NavLink } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
+import {Link, NavLink} from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import "../Styles/Header.css";
 
-function Header({ setUserInfo }) {
+function Header({setUserInfo}) {
   const [cookies, setCookie, removeCookies] = useCookies(["token"]);
 
   const [listMenu, setListMenu] = useState(["Home", "Job", "Contact"]);
@@ -13,14 +13,17 @@ function Header({ setUserInfo }) {
 
   const [navMenu, setNavMenu] = useState(false);
 
+  console.log(user);
   useEffect(() => {
-    if (cookies.user) {
+    console.log(cookies.user);
+    if (cookies.user !== null) {
       fetch(`${process.env.REACT_APP_API_URL}/login?api_token=${cookies.user}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
             setUserInfo(data);
             setUser(data.user_info);
+            console.log("check", data);
             if (data.role_level === 0) {
               setListMenu(["Home", "Job", "Quiz Test", "Contact"]);
             } else if (data.role_level === 1) {
@@ -118,7 +121,7 @@ function Header({ setUserInfo }) {
                           item.replace(/\s/g, "-").toLowerCase() ===
                           "for-recruiter"
                             ? "py-2 px-3 bg-blue-500  rounded-lg border border-blue-500 hover:bg-white font-bold text-white"
-                            : "text-prihover"
+                            : "text-indigo-600"
                         }`}
                         to={`/${item.replace(/\s/g, "-").toLowerCase()}`}
                       >
@@ -132,14 +135,14 @@ function Header({ setUserInfo }) {
               {!cookies.user ? (
                 <>
                   <div className="inline-block py-3 px-2.5">
-                    <Link to="/login" className="hover:text-prihover">
+                    <Link to="/login" className="hover:text-indigo-600">
                       Login
                     </Link>
                   </div>
                   <span>or</span>
                   <div className="inline-block py-3 px-2.5">
                     <Link
-                      className="border border-prihover rounded-md py-2 px-3 bg-prihover text-white hover:bg-white hover:text-black"
+                      className="border border-prihover rounded-md py-2 px-3 bg-indigo-600 text-white hover:bg-white hover:text-black"
                       to="/register"
                     >
                       Signup
@@ -149,7 +152,6 @@ function Header({ setUserInfo }) {
               ) : (
                 <div className=" ">
                   <div className="flex items-center justify-between relative toggle_profile">
-                    <span>{user.full_name}</span>
                     <img
                       src={
                         user.logo_url
@@ -159,7 +161,10 @@ function Header({ setUserInfo }) {
                       alt={user.full_name}
                       className="rounded-full ml-2 max-w-[50px] cursor-pointer"
                     />
-                    <div className="absolute right-0 top-full invisible profile">
+                    <span className="font-semibold p-2 text-xs uppercase">
+                      {user.full_name}
+                    </span>
+                    <div className="absolute right-0 top-full invisible z-50 profile">
                       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                         <div className="flex items-center px-6 py-3 hover:bg-gray-400">
                           <svg
@@ -207,7 +212,7 @@ function Header({ setUserInfo }) {
             </div>
             <div className="md:hidden block">
               <button
-                className="block md:hidden border border-prihover rounded-md py-2 px-3 bg-prihover text-white hover:bg-white hover:text-black"
+                className="block md:hidden border border-prihover rounded-md py-2 px-3 bg-indigo-600text-white hover:bg-white hover:text-black"
                 onClick={() => setNavMenu(true)}
               >
                 <svg

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
 import OverQuizAp from "./OverQuizAp";
 
 function QuizAp() {
@@ -37,8 +37,8 @@ function QuizAp() {
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          setPerson({ ...res.personality });
-          let listQuiz = { ...res.aptitude };
+          setPerson({...res.personality});
+          let listQuiz = {...res.aptitude};
           let count = 0;
           for (let key in listQuiz) {
             if (listQuiz[key] !== null) {
@@ -81,19 +81,19 @@ function QuizAp() {
   }, [cookies.user]);
 
   return (
-    <div className="max-w-[calc(800px+1.75rem)] my-0 mx-auto py-8">
+    <div className="menu-func-recruiter max-w-[calc(800px+1.75rem)] my-0 mx-auto py-8">
       {quiz.length === 15 &&
         quiz.map((ques, index) => {
           return (
             quiz[number] &&
             ques.type_id === quiz[number]["type_id"] && (
               <div key={index}>
-                <div className="mx-auto">{ques.question}</div>
+                <div className="mx-auto font-semibold">{ques.question}</div>
                 <div className="flex flex-col my-8 mx-auto min-h-[400px] justify-center">
                   {ques.options.map((item, index) => (
                     <button
                       key={index}
-                      className="block border border-[#616A94] rounded-2xl px-8 py-4 text-base outline-none select-none mt-4 cursor-pointer hover:bg-[#616A94] transition duration-300"
+                      className="block border border-[#e7e2e2] rounded-2xl px-8 py-4 text-base outline-none select-none mt-4 cursor-pointer hover:bg-green-400 transition duration-300"
                       onClick={(e) => {
                         // hidden element parent when click
                         e.target.parentElement.parentElement.style.display =

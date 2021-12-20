@@ -70,9 +70,33 @@ function ListJob() {
       })
       .catch((err) => console.log(err));
   };
+  const downloadcv = (cv_path) => {
+    const link = document.createElement("a");
+    link.href = `https://cvtojob.tk/api/downcv?cv_path=${cv_path}`;
+    document.body.appendChild(link);
+    link.click();
+    // var requestOptions = {
+    //   method: "GET",
+    //   redirect: "follow",
+    // };
 
+    // fetch(
+    //   `${process.env.REACT_APP_API_URL}/downcv?cv_path=${cv_path}`,
+    //   requestOptions
+    // )
+    //   .then((response) => response.text())
+    //   .then((result) => {
+    //     const url = window.URL.createObjectURL(new Blob([result]));
+    //     const link = document.createElement("a");
+    //     link.href = url;
+    //     link.setAttribute("download", "cv.png");
+    //     document.body.appendChild(link);
+    //     link.click();
+    //   })
+    //   .catch((error) => console.log("error", error));
+  };
   return (
-    <div className="m-2 relative">
+    <div className="menu-func-recruiter m-2 relative">
       <h2 className="text-xl mb-4">
         <span className="font-bold">
           {job.company_name ? job.company_name : "Loading..."}
@@ -89,8 +113,8 @@ function ListJob() {
               index <= page.max && (
                 <div key={index} className="col-span-1 relative ">
                   <div
-                    onClick={() => viewResult(item.job_id)}
-                    className=" flex flex-col justify-between cursor-pointer bg-white shadow-md rounded-lg p-4 h-full"
+                    onClick={(e) => viewResult(item.job_id)}
+                    className="menu-func-recruiter flex flex-col justify-between cursor-pointer bg-white shadow-md rounded-lg p-4 h-full"
                   >
                     <div className="flex justify-between">
                       <div className="flex">
@@ -245,7 +269,7 @@ function ListJob() {
         </button>
       </div>
       {show && (
-        <div className="fixed overflow-y-scroll scrollbar-hide  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen   mx-auto px-4 sm:px-8">
+        <div className=" fixed overflow-y-scroll scrollbar-hide   top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen   mx-auto px-4 sm:px-8 backdrop-blur-xl ">
           <div className="py-8">
             <div className="flex justify-end">
               <button onClick={() => setShow(false)} className="block">
@@ -265,7 +289,7 @@ function ListJob() {
             </div>
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
               <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
-                <table className="min-w-full leading-normal">
+                <table className=" menu-func-recruiter min-w-full leading-normal  transition ease-in-out delay-1000">
                   <thead>
                     <tr>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
@@ -332,7 +356,15 @@ function ListJob() {
                             <p className="text-gray-900 ">{item.email}</p>
                           </td>
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
-                            <p className="text-gray-900 ">{item.cv_file}</p>
+                            <p
+                              className="text-gray-900 "
+                              onClick={(e) => {
+                                e.preventDefault();
+                                downloadcv(item.cv_file);
+                              }}
+                            >
+                              {item.cv_file}
+                            </p>
                           </td>
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
                             <p className="text-gray-900 ">{item.cv_score}</p>
@@ -343,7 +375,7 @@ function ListJob() {
                                 <span className="mr-1">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 "
+                                    className="h-6 w-6 cursor-pointer "
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -364,7 +396,7 @@ function ListJob() {
                                 </span>
                               </button>
 
-                              <div className=" w-max absolute hidden -top-16 -left-16  text-gray-700 z-50 pt-1 group-hover:block">
+                              <div className=" w-max absolute hidden  -top-16 right-1  text-gray-700 z-50 pt-1 group-hover:block">
                                 <div className="flex items-center justify-between">
                                   <div className="px-3 py-3 mx-1 bg-yellow-300 rounded-lg">
                                     <h3 className="text-center font-bold text-sm whitespace-no-wrap ">

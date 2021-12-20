@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState} from "react";
+import {useCookies} from "react-cookie";
 
-function AddQuestion({ userInfo }) {
+function AddQuestion({userInfo}) {
   const [cookies, setCookie] = useCookies(["user"]);
-  const [user, setUser] = useState({ ...userInfo });
+  const [user, setUser] = useState({...userInfo});
 
   const [question, setQuestion] = useState({
     option: "1",
@@ -25,7 +25,7 @@ function AddQuestion({ userInfo }) {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setQuestion({ [e.target.name]: e.target.value });
+    setQuestion({[e.target.name]: e.target.value});
   };
 
   const handleChangeAptitude = (e) => {
@@ -92,7 +92,7 @@ function AddQuestion({ userInfo }) {
       });
   };
   return (
-    <div className="m-2 relative">
+    <div className="menu-func-recruiter m-2 relative">
       <h2 className="text-xl mb-4">
         <span className="font-bold">
           {user.info.company_name ? user.info.company_name : "Loading..."}

@@ -78,16 +78,20 @@ function AddJob({userInfo}) {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.success) {
           toast.success(data.message);
         } else {
-          toast.error("error!");
+          toast.error("check value input");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("check value");
+      });
   };
   return (
-    <div className="m-2 relative">
+    <div className="m-2 relative menu-func-recruiter">
       <h2 className="text-xl mb-4">
         <span className="font-bold">{user.info.company_name}</span>
         {` - `}
@@ -96,7 +100,7 @@ function AddJob({userInfo}) {
       <hr />
       <form className="my-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4" id="formAdd">
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Title</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -107,9 +111,10 @@ function AddJob({userInfo}) {
               }}
             />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Require</label>
-            <input
+            <textarea
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Require"
@@ -123,6 +128,7 @@ function AddJob({userInfo}) {
               Job Description
             </label>
             <textarea
+              rows={10}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Job Description"
               onChange={(e) => {
@@ -130,9 +136,10 @@ function AddJob({userInfo}) {
               }}
             />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Benefit</label>
-            <input
+            <textarea
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Benefit"
@@ -141,9 +148,10 @@ function AddJob({userInfo}) {
               }}
             />
           </div>
-          <div className="col-span-1">
+          <div className="col-span-2">
             <label className="block text-sm font-bold mb-2">Job Place</label>
             <input
+              rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Place"
@@ -157,7 +165,7 @@ function AddJob({userInfo}) {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Job Salary"
+              placeholder=" Salary (Dollar $$$$)"
               onChange={(e) => {
                 setJob({...job, salary: e.target.value});
               }}
@@ -214,11 +222,20 @@ function AddJob({userInfo}) {
                     <option value="java" className="capitalize">
                       java
                     </option>
+                    <option value="java" className="capitalize">
+                      javascript
+                    </option>
                     <option value="php" className="capitalize">
                       php
                     </option>
                     <option value="python" className="capitalize">
                       python
+                    </option>
+                    <option value="python" className="capitalize">
+                      ruby
+                    </option>
+                    <option value="python" className="capitalize">
+                      sql
                     </option>
                     <option value="swift" className="capitalize">
                       swift
@@ -226,8 +243,11 @@ function AddJob({userInfo}) {
                     <option value="c#" className="capitalize">
                       c#
                     </option>
-                    <option value="objectC" className="capitalize">
-                      object-C
+                    <option value="c" className="capitalize">
+                      C
+                    </option>
+                    <option value="c++" className="capitalize">
+                      C++
                     </option>
                     <option value="dart" className="capitalize">
                       dart
@@ -246,6 +266,39 @@ function AddJob({userInfo}) {
                     </option>
                     <option value="vuejs" className="capitalize">
                       vuejs
+                    </option>
+                    <option value="asp.net" className="capitalize">
+                      asp.net
+                    </option>
+                    <option value=".net" className="capitalize">
+                      .net
+                    </option>
+                    <option value="react native" className="capitalize">
+                      react native
+                    </option>
+                    <option value="flutter" className="capitalize">
+                      flutter
+                    </option>
+                    <option value="kotlin" className="capitalize">
+                      kotlin
+                    </option>
+                    <option value="golang" className="capitalize">
+                      golang
+                    </option>
+                    <option value="Django" className="capitalize">
+                      Django
+                    </option>
+                    <option value="html" className="capitalize">
+                      html
+                    </option>
+                    <option value="css" className="capitalize">
+                      css
+                    </option>
+                    <option value="tailwind" className="capitalize">
+                      tailwind
+                    </option>
+                    <option value="bootstrap" className="capitalize">
+                      bootstrap
                     </option>
                   </select>
                 </div>

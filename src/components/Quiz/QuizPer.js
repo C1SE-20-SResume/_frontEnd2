@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
 
 import Summary from "./Summary";
 
-function QuizPer({ person, aptitudeScore }) {
+function QuizPer({person, aptitudeScore}) {
   const [cookies] = useCookies(["user"]);
 
   const [quiz, setQuiz] = useState([]);
@@ -65,6 +65,7 @@ function QuizPer({ person, aptitudeScore }) {
         if (data.success) {
           setMessage(data.message);
           setResult(data);
+          console.log(data);
         } else {
         }
       })
@@ -76,15 +77,18 @@ function QuizPer({ person, aptitudeScore }) {
   return (
     <>
       {message === "" ? (
-        <form onSubmit={handleSubmit}>
+        <form className="menu-func-recruiter" onSubmit={handleSubmit}>
+          <h3 className="text-center font-semibold text-2xl ">
+            What Kind Of People Are You ?
+          </h3>
           <div className="mx-auto">
             To take the Big Five personality assessment, rate each statement
             according to how well it describes you. Base your ratings on how you
             really are, not how you would like to be.
           </div>
           <div className="mb-4">
-            <table className="mb-2 table-auto mt-4 rounded-lg">
-              <thead className="text-base bg-[#c4933b] px-7 py-4  uppercase ">
+            <table className="mb-2 w-full table-auto mt-4 rounded-lg">
+              <thead className="text-base bg-green-400 text-white px-7 py-4  uppercase ">
                 <tr>
                   <th className="text-center">Question</th>
                   <th className="text-center">INACCURATE</th>
@@ -108,7 +112,7 @@ function QuizPer({ person, aptitudeScore }) {
                           onChange={(e) => {
                             item.score = parseInt(e.target.value);
                           }}
-                          {...(i === 1 && { required: true })}
+                          {...(i === 1 && {required: true})}
                         />
                       </td>
                     ))}
@@ -117,7 +121,7 @@ function QuizPer({ person, aptitudeScore }) {
               </tbody>
             </table>
           </div>
-          <button className="block border border-[#616A94] rounded-2xl px-8 py-2 text-base outline-none select-none mt-4 cursor-pointer hover:bg-[#616A94] mx-auto transition duration-300">
+          <button className="block border  bg-green-400 text-white rounded-2xl px-8 py-2 text-base outline-none select-none mt-4 cursor-pointer hover:bg-[#fff] hover:text-black mx-auto transition duration-300">
             Submit
           </button>
         </form>

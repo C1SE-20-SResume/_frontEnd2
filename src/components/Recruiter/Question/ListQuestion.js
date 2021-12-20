@@ -28,9 +28,26 @@ function ListQuestion() {
       })
       .catch((err) => console.log(err));
   }, [cookies.user]);
+  const onDelete = (id) => {
+    const check = window.confirm("Are you sure you want to delete this job?");
+    if (check) {
+      alert("ok");
+      fetch(
+        `${process.env.REACT_APP_API_URL}/recruiter/ques/delete/${id}?api_token=${cookies.user}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status) {
+            alert(data.message);
+            window.location.reload();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   return (
     <>
-      <div className="m-2 relative">
+      <div className="menu-func-recruiter m-2 relative">
         <h2 className="text-xl mb-4">
           <span className="font-bold">
             {info.company_name ? info.company_name : "Loading..."}
@@ -66,7 +83,7 @@ function ListQuestion() {
               </button>
             </div>
           </div>
-          <table className="table-auto w-full">
+          <table className="menu-func-recruiter table-auto w-full">
             <thead>
               <tr>
                 <th className="w-1/5 border px-4 py-2">Type Question</th>
@@ -75,7 +92,7 @@ function ListQuestion() {
                 <th className="w-2/12 border px-4 py-2">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               {option === "aptitude"
                 ? aptitude.map((item, index) => (
                     <tr key={index}>
@@ -102,7 +119,13 @@ function ListQuestion() {
                           </svg>
                         </button>
 
-                        <button className="hover:text-red-500 mx-1 hover:scale-110">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            onDelete(item.ques_id);
+                          }}
+                          className="hover:text-red-500 mx-1 hover:scale-110"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4"
@@ -146,7 +169,13 @@ function ListQuestion() {
                           </svg>
                         </button>
 
-                        <button className="hover:text-red-500 mx-1 hover:scale-110">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            onDelete(item.ques_id);
+                          }}
+                          className="hover:text-red-500 mx-1 hover:scale-110"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4"

@@ -13,11 +13,17 @@ function JobDetail({role}) {
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetch(`${process.env.REACT_APP_API_URL}/job/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          let value = JSON.stringify(data.data);
+          let a = value.replace("team", "sasasasafsa");
+          console.log(a);
           setJob(data.data);
+
+          console.log(data.data);
         }
       })
       .catch((err) => console.error(err));
@@ -57,8 +63,8 @@ function JobDetail({role}) {
           setShowResult(true);
           console.log(data);
         } else {
-          alert(data.message);
-          window.location.reload();
+          toast.error(data.message);
+          // window.location.reload();
         }
       })
       .catch((err) => console.error(err));
@@ -79,12 +85,52 @@ function JobDetail({role}) {
       })
       .catch((err) => console.error(err));
   };
+
+  const renderDescription = () => {
+    const des = JSON.stringify(job.job_descrip);
+    const des_array = des ? des.split("\\n") : [];
+    return des_array.map((description, index) => {
+      if (index === 0) {
+        return <div>{description.slice(1, description.length)}</div>;
+      } else if (index === des_array.length - 1) {
+        return <div>{description.slice(0, description.length - 1)}</div>;
+      }
+      return <div>{description}</div>;
+    });
+  };
+  const renderBenefit = () => {
+    const ben = JSON.stringify(job.job_benefit);
+    const ben_array = ben ? ben.split("\\n") : [];
+    return ben_array.map((benefit, index) => {
+      if (index === 0) {
+        return <div>{benefit.slice(1, benefit.length)}</div>;
+      } else if (index === ben_array.length - 1) {
+        return <div>{benefit.slice(0, benefit.length - 1)}</div>;
+      }
+      return <div>{benefit}</div>;
+    });
+  };
+  const renderRequire = () => {
+    const req = JSON.stringify(job.job_benefit);
+    const req_array = req ? req.split("\\n") : [];
+    return req_array.map((require, index) => {
+      if (index === 0) {
+        return <div>{require.slice(1, require.length)}</div>;
+      } else if (index === req_array.length - 1) {
+        return <div>{require.slice(0, require.length - 1)}</div>;
+      }
+      return <div>{require}</div>;
+    });
+  };
+
   return (
     <main>
-      <section className="py-10 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200">
+      <section className="py-10 ">
         <div className="container ">
           <div className="text-center mb-6">
-            <h2 className="text-2xl mb-4 font-bold">Job Detail</h2>
+            <h2 className="text-2xl mb-4 font-bold">
+              <span className="text-indigo-600">Job</span> Detail
+            </h2>
             <p>
               Post a job to tell us about your project. We'll quickly match you
               with the right freelancers.
@@ -102,11 +148,13 @@ function JobDetail({role}) {
                     />
                   </div>
                   <div className="ml-5">
-                    <h3 className="capitalize text-lg">{job.job_title}</h3>
+                    <h3 className="capitalize font-black text-lg">
+                      {job.job_title}
+                    </h3>
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-2"
+                        className="h-4 w-4 mr-2 text-indigo-600"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -118,12 +166,12 @@ function JobDetail({role}) {
                           d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                         />
                       </svg>
-                      <span>{job.company_name}</span>
+                      <span className="font-medium">{job.company_name}</span>
                     </div>
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-2"
+                        className="h-4 w-4 mr-2 text-red-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -141,28 +189,34 @@ function JobDetail({role}) {
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      <span>{job.job_place}</span>
+                      <span className="font-medium">{job.job_place}</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-10">
                   <div className="mb-4">
-                    <h4>
-                      <span className="font-bold">Job Description</span>
+                    <h4 className="mb-4">
+                      <span className="font-semibold text-lg ">
+                        Job Description
+                      </span>
                     </h4>
-                    <p>{job.job_descrip}</p>
+                    <p className="text-sm leading-6 ">{renderDescription()}</p>
+                  </div>
+                  <div className="mb-4 ">
+                    <h4 className="mb-4">
+                      <span className="font-semibold text-lg ">
+                        Job Benefit
+                      </span>
+                    </h4>
+                    <p className="text-sm leading-6 ">{renderBenefit()}</p>
                   </div>
                   <div className="mb-4">
-                    <h4>
-                      <span className="font-bold">Job Benefit</span>
+                    <h4 className="mb-4">
+                      <span className="font-semibold text-lg ">
+                        Job Require{" "}
+                      </span>
                     </h4>
-                    <p>{job.job_benefit}</p>
-                  </div>
-                  <div className="mb-4">
-                    <h4>
-                      <span className="font-bold">Job Require </span>
-                    </h4>
-                    <p>{job.job_require}</p>
+                    <p className="text-sm leading-6  ">{renderRequire()}</p>
                   </div>
                 </div>
               </div>
@@ -205,7 +259,9 @@ function JobDetail({role}) {
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span className="flex-grow text-center">Full Time</span>
+                    <span className="flex-grow text-center">
+                      {job.work_time === "f" ? "Full-time" : "Part-time"}
+                    </span>
                   </div>
                   <div className="flex items-center my-3">
                     <svg
@@ -234,8 +290,8 @@ function JobDetail({role}) {
                 </div>
 
                 {showResult && (
-                  <div className="fixed  w-1/3 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className=" shadow-md">
+                  <div className="animationForresult w-screen h-screen  relative ">
+                    <div className=" shadow-md animationForresult fixed  w-9/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <div
                         className={`${
                           getresult.cv_pass === 1
@@ -285,22 +341,22 @@ function JobDetail({role}) {
                               : "Your CV has not been prioritized, but don't worry, you wait for the recruiter to contact you as soon as possible. Thank you!"}
                           </h3>
                         </div>
-                        <div className="m-8">
-                          <div className="text-center font-medium text-gray-500">
-                            <p>
-                              Rank : <span>{getresult.rank}</span>{" "}
-                            </p>
+                        <div className="m-8 w-full">
+                          <div className="text-sm flex justify-between  font-medium text-gray-500">
+                            <p>keywords was found: </p>
+                            <span>{getresult.keyword_found + ""}</span>
                           </div>
-                          <div className="text-center font-medium text-gray-500">
-                            <p>
-                              Score : <span>{getresult.cv_score}</span>{" "}
-                            </p>
+                          <div className="text-sm flex justify-between   font-medium text-gray-500">
+                            <p>keywords not found:</p>
+                            <span>{getresult.keyword_not_found}</span>
                           </div>
-                          <div className="text-center font-medium text-gray-500">
-                            <p>
-                              keyword was found :{" "}
-                              <span>{getresult.keyword_found + "  "}</span>{" "}
-                            </p>
+                          <div className="text-sm flex justify-between   font-medium text-gray-500">
+                            <p>Score :</p>
+                            <span>{getresult.cv_score}</span>
+                          </div>
+                          <div className=" text-sm flex justify-between  font-medium text-gray-500">
+                            <p>Rank:</p>
+                            <span>{getresult.rank}</span>
                           </div>
                         </div>
                         <div className="m-8">
@@ -349,7 +405,10 @@ function JobDetail({role}) {
             <div className="mt-4">
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Upload CV
+                  Upload CV{" "}
+                  <span className="text-xs font-light">
+                    (Only accept files with English language )
+                  </span>
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -357,6 +416,9 @@ function JobDetail({role}) {
                   placeholder="Upload CV"
                   onChange={(e) => handleUploadCV(e, true)}
                 />
+                <span className="text-xs">
+                  (*txt, doc, docx, pdf, png, jpg, jpeg*)
+                </span>
                 {existCV && (
                   <>
                     <p>Or</p>

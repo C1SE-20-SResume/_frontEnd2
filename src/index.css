@@ -12,3 +12,90 @@
     @apply outline-none;
   }
 }
+/* // Variables
+$facebook: #3b5998;
+$twitter: #1da1f2; */
+body {
+  font-family: "Poppins", sans-serif;
+}
+body,
+.container,
+.register-container,
+.render-tab-recruiter,
+.menu-func-recruiter {
+  animation: transitionIn 0.65s;
+}
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animationForresult {
+  animation: trans 1s;
+}
+@keyframes trans {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+.bg-facebook {
+  background-color: #3b5998;
+}
+
+.bg-twitter {
+  background-color: #1da1f2;
+}
+#bg-login {
+  background-image: url("https://job-board.dexignzone.com/react/demo/static/media/bg6.9d838a09.jpg");
+  background-size: cover;
+}
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+.carousel-item {
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+.carousel-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+#carousel-1:checked
+  ~ .control-1
+  ~ .carousel-indicators
+  li:nth-child(1)
+  .carousel-bullet,
+#carousel-2:checked
+  ~ .control-2
+  ~ .carousel-indicators
+  li:nth-child(2)
+  .carousel-bullet,
+#carousel-3:checked
+  ~ .control-3
+  ~ .carousel-indicators
+  li:nth-child(3)
+  .carousel-bullet {
+  color: #2b6cb0; /*Set to match the Tailwind colour you want the active one to be */
+}

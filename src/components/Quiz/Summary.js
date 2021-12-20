@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Chart, registerables } from "chart.js";
+import React, {useState, useEffect, useRef} from "react";
+import {Chart, registerables} from "chart.js";
 Chart.register(...registerables);
 
 const chartConfigApti = {
@@ -42,11 +42,11 @@ const chartConfigPers = {
     },
   },
 };
-function Summary({ message, result }) {
+function Summary({message, result}) {
   const [kq, setKq] = useState({
-    aptitude_graph: { maths: 2, english: 1, programing: 2 },
+    aptitude_graph: {maths: 2, english: 1, programing: 2},
     aptitude_score: "5/15",
-    message: "Save test quiz results successful",
+    message: "RESULT :",
     personality_graph: {
       openness: 3,
       conscientiousness: 3,
@@ -74,7 +74,7 @@ function Summary({ message, result }) {
     if (chartInsApt) {
       chartInsApt.destroy();
     }
-    if (chartAptitude && chartAptitude.current) {
+    if (chartAptitude && chartAptitude.current && kq.aptitude_graph) {
       chartConfigApti.labels = Object.keys(kq.aptitude_graph);
       chartConfigApti.data.datasets = [
         {
@@ -105,13 +105,13 @@ function Summary({ message, result }) {
       );
       setChartInsApt(newChartInstance);
     }
-  }, [chartAptitude]);
+  }, [kq.aptitude_graph, chartAptitude]);
 
   useEffect(() => {
     if (chartInsPerson) {
       chartInsPerson.destroy();
     }
-    if (chartPersonality && chartPersonality.current) {
+    if (chartPersonality && chartPersonality.current && kq.personality_graph) {
       chartConfigPers.labels = Object.keys(kq.personality_graph);
 
       chartConfigPers.data.datasets = [
@@ -152,10 +152,10 @@ function Summary({ message, result }) {
       );
       setChartInsPerson(newChartInstance);
     }
-  }, [chartPersonality]);
+  }, [kq.personality_graph, chartPersonality]);
 
   return (
-    <div className="text-center">
+    <div className="menu-func-recruiter text-center">
       <h1>{message}</h1>
       <div className="mt-4">
         <h3>
