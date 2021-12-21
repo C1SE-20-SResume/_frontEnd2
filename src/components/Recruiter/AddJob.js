@@ -1,10 +1,23 @@
-import React, {useState, useEffect} from "react";
-import {useCookies} from "react-cookie";
-import {toast} from "react-toastify";
+import React, { useState, useEffect } from "react";
+import CreatableSelect from "react-select/creatable";
+import { ActionMeta, OnChangeValue } from "react-select";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 
-function AddJob({userInfo}) {
+function AddJob({ userInfo }) {
   const [cookies, setCookie] = useCookies(["user"]);
-  const [user, setUser] = useState({...userInfo});
+  const [user, setUser] = useState({ ...userInfo });
+
+  let options = [
+    {
+      value: "java",
+      label: "Java",
+    },
+    {
+      value: "javascript",
+      label: "Javascript",
+    },
+  ];
 
   const [job, setJob] = useState({
     job_title: "",
@@ -26,11 +39,11 @@ function AddJob({userInfo}) {
   ]);
 
   const [listWeight, setListWeight] = useState([
-    {id: 1, name: "Very Low"},
-    {id: 2, name: "Low"},
-    {id: 3, name: "Medium"},
-    {id: 4, name: "High"},
-    {id: 5, name: "Very High"},
+    { id: 1, name: "Very Low" },
+    { id: 2, name: "Low" },
+    { id: 3, name: "Medium" },
+    { id: 4, name: "High" },
+    { id: 5, name: "Very High" },
   ]);
 
   useEffect(() => {
@@ -47,7 +60,7 @@ function AddJob({userInfo}) {
       toast.error("You can only add 10 keywords");
       return;
     }
-    setListKey([...listKey, {keyword: "", weight: ""}]);
+    setListKey([...listKey, { keyword: "", weight: "" }]);
   };
 
   const removeKeyword = (index) => {
@@ -90,6 +103,16 @@ function AddJob({userInfo}) {
         toast.error("check value");
       });
   };
+
+  const handleChange = (newValue, actionMeta) => {
+    setListKey(
+      listKey.map((item, i) => ({
+        ...item,
+        keyword: newValue.value,
+      }))
+    );
+    console.log(listKey);
+  };
   return (
     <div className="m-2 relative menu-func-recruiter">
       <h2 className="text-xl mb-4">
@@ -107,7 +130,7 @@ function AddJob({userInfo}) {
               type="text"
               placeholder="Job Title"
               onChange={(e) => {
-                setJob({...job, job_title: e.target.value});
+                setJob({ ...job, job_title: e.target.value });
               }}
             />
           </div>
@@ -119,7 +142,7 @@ function AddJob({userInfo}) {
               type="text"
               placeholder="Job Require"
               onChange={(e) => {
-                setJob({...job, job_require: e.target.value});
+                setJob({ ...job, job_require: e.target.value });
               }}
             />
           </div>
@@ -132,7 +155,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Job Description"
               onChange={(e) => {
-                setJob({...job, job_descrip: e.target.value});
+                setJob({ ...job, job_descrip: e.target.value });
               }}
             />
           </div>
@@ -144,7 +167,7 @@ function AddJob({userInfo}) {
               type="text"
               placeholder="Job Benefit"
               onChange={(e) => {
-                setJob({...job, job_benefit: e.target.value});
+                setJob({ ...job, job_benefit: e.target.value });
               }}
             />
           </div>
@@ -156,7 +179,7 @@ function AddJob({userInfo}) {
               type="text"
               placeholder="Job Place"
               onChange={(e) => {
-                setJob({...job, job_place: e.target.value});
+                setJob({ ...job, job_place: e.target.value });
               }}
             />
           </div>
@@ -167,7 +190,7 @@ function AddJob({userInfo}) {
               type="text"
               placeholder=" Salary (Dollar $$$$)"
               onChange={(e) => {
-                setJob({...job, salary: e.target.value});
+                setJob({ ...job, salary: e.target.value });
               }}
             />
           </div>
@@ -177,7 +200,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="date"
               onChange={(e) => {
-                setJob({...job, date_expire: e.target.value});
+                setJob({ ...job, date_expire: e.target.value });
               }}
             />
           </div>
@@ -187,7 +210,7 @@ function AddJob({userInfo}) {
               className="w-full p-2 rounded-md"
               onChange={(e) => {
                 console.log();
-                setJob({...job, work_time: e.target.value});
+                setJob({ ...job, work_time: e.target.value });
               }}
             >
               <option value="f">Full Time</option>
@@ -201,107 +224,7 @@ function AddJob({userInfo}) {
                   <label className="block text-sm font-bold mb-2">
                     Keyword
                   </label>
-                  <input type="text" className="w-full p-2 rounded-md" />
-                  {/* <select
-                    className="w-full p-2 rounded-md"
-                    onChange={(e) =>
-                      setListKey(
-                        listKey.map((item, i) =>
-                          i === index
-                            ? {
-                                ...item,
-                                keyword: e.target.value,
-                              }
-                            : item
-                        )
-                      )
-                    }
-                  >
-                    <option value="---" className="capitalize">
-                      Language
-                    </option>
-                    <option value="java" className="capitalize">
-                      java
-                    </option>
-                    <option value="java" className="capitalize">
-                      javascript
-                    </option>
-                    <option value="php" className="capitalize">
-                      php
-                    </option>
-                    <option value="python" className="capitalize">
-                      python
-                    </option>
-                    <option value="python" className="capitalize">
-                      ruby
-                    </option>
-                    <option value="python" className="capitalize">
-                      sql
-                    </option>
-                    <option value="swift" className="capitalize">
-                      swift
-                    </option>
-                    <option value="c#" className="capitalize">
-                      c#
-                    </option>
-                    <option value="c" className="capitalize">
-                      C
-                    </option>
-                    <option value="c++" className="capitalize">
-                      C++
-                    </option>
-                    <option value="dart" className="capitalize">
-                      dart
-                    </option>
-                    <option value="reactjs" className="capitalize">
-                      reactjs
-                    </option>
-                    <option value="anglular" className="capitalize">
-                      anglular
-                    </option>
-                    <option value="laravel" className="capitalize">
-                      laravel
-                    </option>
-                    <option value="nodejs" className="capitalize">
-                      nodejs
-                    </option>
-                    <option value="vuejs" className="capitalize">
-                      vuejs
-                    </option>
-                    <option value="asp.net" className="capitalize">
-                      asp.net
-                    </option>
-                    <option value=".net" className="capitalize">
-                      .net
-                    </option>
-                    <option value="react native" className="capitalize">
-                      react native
-                    </option>
-                    <option value="flutter" className="capitalize">
-                      flutter
-                    </option>
-                    <option value="kotlin" className="capitalize">
-                      kotlin
-                    </option>
-                    <option value="golang" className="capitalize">
-                      golang
-                    </option>
-                    <option value="Django" className="capitalize">
-                      Django
-                    </option>
-                    <option value="html" className="capitalize">
-                      html
-                    </option>
-                    <option value="css" className="capitalize">
-                      css
-                    </option>
-                    <option value="tailwind" className="capitalize">
-                      tailwind
-                    </option>
-                    <option value="bootstrap" className="capitalize">
-                      bootstrap
-                    </option>
-                  </select> */}
+                  <CreatableSelect onChange={handleChange} options={options} />
                 </div>
                 <div className="w-5/12 ml-2">
                   <label className="block text-sm font-bold mb-2">Weight</label>
