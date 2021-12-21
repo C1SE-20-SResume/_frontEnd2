@@ -34,7 +34,7 @@ function AddJob({ userInfo }) {
   const [listKey, setListKey] = useState([
     {
       keyword: "",
-      weight: "",
+      weight: "1",
     },
   ]);
 
@@ -91,7 +91,6 @@ function AddJob({ userInfo }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           toast.success(data.message);
         } else {
@@ -104,15 +103,6 @@ function AddJob({ userInfo }) {
       });
   };
 
-  const handleChange = (newValue, actionMeta) => {
-    setListKey(
-      listKey.map((item, i) => ({
-        ...item,
-        keyword: newValue.value,
-      }))
-    );
-    console.log(listKey);
-  };
   return (
     <div className="m-2 relative menu-func-recruiter">
       <h2 className="text-xl mb-4">
@@ -224,7 +214,19 @@ function AddJob({ userInfo }) {
                   <label className="block text-sm font-bold mb-2">
                     Keyword
                   </label>
-                  <CreatableSelect onChange={handleChange} options={options} />
+                  <CreatableSelect
+                    onChange={(newValue, acitonMeta) => {
+                      setListKey(
+                        listKey.map((item, i) => {
+                          if (index === i) {
+                            return { ...item, keyword: newValue.value };
+                          }
+                          return item;
+                        })
+                      );
+                    }}
+                    options={options}
+                  />
                 </div>
                 <div className="w-5/12 ml-2">
                   <label className="block text-sm font-bold mb-2">Weight</label>
@@ -241,7 +243,6 @@ function AddJob({ userInfo }) {
                             : item
                         )
                       );
-                      console.log(listKey);
                     }}
                   >
                     {listWeight.map((i) => (
