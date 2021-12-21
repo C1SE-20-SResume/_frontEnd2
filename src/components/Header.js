@@ -15,9 +15,7 @@ function Header({ setUserInfo }) {
 
   const theHeader = useRef(null);
 
-  console.log(user);
   useEffect(() => {
-    console.log(cookies.user);
     if (cookies.user && cookies.user !== "") {
       fetch(`${process.env.REACT_APP_API_URL}/login?api_token=${cookies.user}`)
         .then((res) => res.json())
@@ -25,7 +23,6 @@ function Header({ setUserInfo }) {
           if (data.success) {
             setUserInfo(data);
             setUser(data.user_info);
-            console.log("check", data);
             if (data.role_level === 0) {
               setListMenu(["Home", "Job", "Quiz Test", "About us"]);
             } else if (data.role_level === 1) {
@@ -62,6 +59,35 @@ function Header({ setUserInfo }) {
       theHeader.current.classList.remove("fixed", "bg-[#f2f2f2]");
     }
   };
+
+  const [dataSearch, setDataSearch] = useState([]);
+  const [resultSearch, setResultSearch] = useState([]);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/job`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setDataSearch(data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const search = e.target.value;
+    if (search === "") {
+      setResultSearch([]);
+    } else {
+      const result = dataSearch.filter((item) => {
+        return item.job_title.toLowerCase().includes(search.toLowerCase());
+      });
+      setResultSearch(result);
+    }
+    console.log(resultSearch);
+  };
+
   return (
     <header>
       <div className="bg-[#1e1e1e] bg-opacity-10">
@@ -290,6 +316,56 @@ function Header({ setUserInfo }) {
           </div>
         </div>
       )}
+      <div className="">
+        <div className="container mx-auto px-4 relative text-center">
+          <div class="relative flex items-center w-full h-12 rounded-lg shadow-lg bg-white overflow-hidden">
+            <div class="grid place-items-center h-full w-12 text-gray-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+
+            <input
+              class="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+              type="text"
+              id="search"
+              placeholder="Search something.."
+              onChange={handleSearch}
+            />
+          </div>
+          <div className="absolute mx-4 mt-1 top-full right-0 left-0 bg-white shadow-lg rounded-md">
+            <ul>
+              {resultSearch.length > 0 &&
+                resultSearch.map((item, index) => (
+                  <li
+                    key={index}
+                    className="py-2 px-10 text-left
+                  "
+                  >
+                    <Link
+                      to={`/job/${item.job_id}`}
+                      key={index}
+                      className="hover:text-prihover block"
+                    >
+                      {item.job_title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
