@@ -80,12 +80,16 @@ function Header({ setUserInfo }) {
     if (search === "") {
       setResultSearch([]);
     } else {
-      const result = dataSearch.filter((item) => {
+      let result = dataSearch.filter((item) => {
         return item.job_title.toLowerCase().includes(search.toLowerCase());
       });
+      if (result.length === 0) {
+        result = dataSearch.filter((item) => {
+          return item.company_name.toLowerCase().includes(search.toLowerCase());
+        });
+      }
       setResultSearch(result);
     }
-    console.log(resultSearch);
   };
 
   return (
@@ -358,7 +362,7 @@ function Header({ setUserInfo }) {
                       key={index}
                       className="hover:text-prihover block"
                     >
-                      {item.job_title}
+                      {`${item.job_title} - ${item.company_name}`}
                     </Link>
                   </li>
                 ))}
