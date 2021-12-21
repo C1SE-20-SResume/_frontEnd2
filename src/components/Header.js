@@ -14,6 +14,7 @@ function Header({ setUserInfo }) {
   const [navMenu, setNavMenu] = useState(false);
 
   const theHeader = useRef(null);
+  const theSearch = useRef(null);
 
   useEffect(() => {
     if (cookies.user && cookies.user !== "") {
@@ -346,9 +347,20 @@ function Header({ setUserInfo }) {
               id="search"
               placeholder="Search something.."
               onChange={handleSearch}
+              onBlur={() => {
+                theSearch.current.classList.remove("block");
+                theSearch.current.classList.add("hidden");
+              }}
+              onFocus={() => {
+                theSearch.current.classList.remove("hidden");
+                theSearch.current.classList.add("block");
+              }}
             />
           </div>
-          <div className="absolute mx-4 mt-1 top-full right-0 left-0 bg-white shadow-lg rounded-md z-[999]">
+          <div
+            className="absolute mx-4 mt-1 top-full right-0 left-0 bg-white shadow-lg rounded-md z-[999]"
+            ref={theSearch}
+          >
             <ul>
               {resultSearch.length > 0 &&
                 resultSearch.map((item, index) => (
