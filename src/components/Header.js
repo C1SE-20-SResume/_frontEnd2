@@ -347,14 +347,6 @@ function Header({ setUserInfo }) {
               id="search"
               placeholder="Search something.."
               onChange={handleSearch}
-              onBlur={() => {
-                theSearch.current.classList.remove("block");
-                theSearch.current.classList.add("hidden");
-              }}
-              onFocus={() => {
-                theSearch.current.classList.remove("hidden");
-                theSearch.current.classList.add("block");
-              }}
             />
           </div>
           <div
