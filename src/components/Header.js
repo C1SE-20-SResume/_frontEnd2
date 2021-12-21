@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {useCookies} from "react-cookie";
-import {Link, NavLink} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import "../Styles/Header.css";
 
-function Header({setUserInfo}) {
+function Header({ setUserInfo }) {
   const [cookies, setCookie, removeCookies] = useCookies(["token"]);
 
   const [listMenu, setListMenu] = useState(["Home", "Job", "About us"]);
@@ -12,6 +12,8 @@ function Header({setUserInfo}) {
   const [user, setUser] = useState({});
 
   const [navMenu, setNavMenu] = useState(false);
+
+  const theHeader = useRef(null);
 
   console.log(user);
   useEffect(() => {
@@ -40,7 +42,7 @@ function Header({setUserInfo}) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          removeCookies("user", {path: "/"});
+          removeCookies("user", { path: "/" });
           setUserInfo({});
           setUser({});
           window.location.reload();
@@ -48,7 +50,18 @@ function Header({setUserInfo}) {
       })
       .catch((err) => console.log(err));
   };
+  useEffect(() => {
+    // window scroll event listener to handle header change
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
+  const handleScroll = () => {
+    if (window.scrollY > 60) {
+      theHeader.current.classList.add("fixed", "bg-[#f2f2f2]");
+    } else {
+      theHeader.current.classList.remove("fixed", "bg-[#f2f2f2]");
+    }
+  };
   return (
     <header>
       <div className="bg-[#1e1e1e] bg-opacity-10">
@@ -91,147 +104,149 @@ function Header({setUserInfo}) {
           </div>
         </div>
       </div>
-      <div className="top-0 left-0 right-0 my-3">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link to="/">
-                <img
-                  src={Logo}
-                  alt="logo"
-                  className="md:max-w-[200px] max-w-[90px] h-auto mr-2"
-                />
-              </Link>
-            </div>
-            <nav className="md:block hidden">
-              <ul className="w-full flex items-center justify-center">
-                {listMenu.length > 0 &&
-                  listMenu.map((item, index) => (
-                    <li
-                      key={index}
-                      className={`inline-block  mx-2  transition-all duration-150
-                      ${
-                        item.replace(/\s/g, "-").toLowerCase() ===
-                        "for-recruiter"
-                          ? ""
-                          : "py-3 px-2.5"
-                      }`}
-                    >
-                      <NavLink
-                        className="hover:text-prihover"
-                        activeClassName={`${
+      <div className="top-0 left-0 right-0 z-[999]" ref={theHeader}>
+        <div className=" my-3 ">
+          <div className="container">
+            <div className="flex items-center justify-between">
+              <div>
+                <Link to="/">
+                  <img
+                    src={Logo}
+                    alt="logo"
+                    className="md:max-w-[200px] max-w-[90px] h-auto mr-2"
+                  />
+                </Link>
+              </div>
+              <nav className="md:block hidden">
+                <ul className="w-full flex items-center justify-center">
+                  {listMenu.length > 0 &&
+                    listMenu.map((item, index) => (
+                      <li
+                        key={index}
+                        className={`inline-block  mx-2  transition-all duration-150
+                        ${
                           item.replace(/\s/g, "-").toLowerCase() ===
                           "for-recruiter"
-                            ? "py-2 px-3 bg-blue-500  rounded-lg border border-blue-500 hover:bg-white font-bold text-white"
-                            : "text-indigo-600"
+                            ? ""
+                            : "py-3 px-2.5"
                         }`}
-                        to={`/${item.replace(/\s/g, "-").toLowerCase()}`}
                       >
-                        {item}
-                      </NavLink>
-                    </li>
-                  ))}
-              </ul>
-            </nav>
-            <div className="md:block hidden max-w-full lg:max-w-[50%]">
-              {!cookies.user ? (
-                <>
-                  <div className="inline-block py-3 px-2.5">
-                    <Link to="/login" className="hover:text-indigo-600">
-                      Login
-                    </Link>
-                  </div>
-                  <span>or</span>
-                  <div className="inline-block py-3 px-2.5">
-                    <Link
-                      className="border border-prihover rounded-md py-2 px-3 bg-indigo-600 text-white hover:bg-white hover:text-black"
-                      to="/register"
-                    >
-                      Signup
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <div className=" ">
-                  <div className="flex items-center justify-between relative toggle_profile">
-                    <img
-                      src={
-                        user.logo_url
-                          ? user.logo_url
-                          : "https://picsum.photos/200"
-                      }
-                      alt={user.full_name}
-                      className="rounded-full ml-2 max-w-[50px] cursor-pointer"
-                    />
-                    <span className="font-semibold p-2 text-xs uppercase">
-                      {user.full_name}
-                    </span>
-                    <div className="absolute right-0 top-full invisible z-50 profile">
-                      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div className="flex items-center px-6 py-3 hover:bg-gray-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span className="ml-2">
-                            <Link to="/profile">Profile</Link>
-                          </span>
-                        </div>
-                        <div className="flex items-center px-6 py-3 hover:bg-gray-400">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                            />
-                          </svg>
-                          <span className="ml-2">
-                            <button onClick={handleLogout}>Logout</button>
-                          </span>
+                        <NavLink
+                          className="hover:text-prihover"
+                          activeClassName={`${
+                            item.replace(/\s/g, "-").toLowerCase() ===
+                            "for-recruiter"
+                              ? "py-2 px-3 bg-blue-500  rounded-lg border border-blue-500 hover:bg-white font-bold text-white"
+                              : "text-indigo-600"
+                          }`}
+                          to={`/${item.replace(/\s/g, "-").toLowerCase()}`}
+                        >
+                          {item}
+                        </NavLink>
+                      </li>
+                    ))}
+                </ul>
+              </nav>
+              <div className="md:block hidden max-w-full lg:max-w-[50%]">
+                {!cookies.user ? (
+                  <>
+                    <div className="inline-block py-3 px-2.5">
+                      <Link to="/login" className="hover:text-indigo-600">
+                        Login
+                      </Link>
+                    </div>
+                    <span>or</span>
+                    <div className="inline-block py-3 px-2.5">
+                      <Link
+                        className="border border-prihover rounded-md py-2 px-3 bg-indigo-600 text-white hover:bg-white hover:text-black"
+                        to="/register"
+                      >
+                        Signup
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className=" ">
+                    <div className="flex items-center justify-between relative toggle_profile">
+                      <img
+                        src={
+                          user.logo_url
+                            ? user.logo_url
+                            : "https://picsum.photos/200"
+                        }
+                        alt={user.full_name}
+                        className="rounded-full ml-2 max-w-[50px] cursor-pointer"
+                      />
+                      <span className="font-semibold p-2 text-xs uppercase">
+                        {user.full_name}
+                      </span>
+                      <div className="absolute right-0 top-full invisible z-50 profile">
+                        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                          <div className="flex items-center px-6 py-3 hover:bg-gray-400">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span className="ml-2">
+                              <Link to="/profile">Profile</Link>
+                            </span>
+                          </div>
+                          <div className="flex items-center px-6 py-3 hover:bg-gray-400">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                              />
+                            </svg>
+                            <span className="ml-2">
+                              <button onClick={handleLogout}>Logout</button>
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-            <div className="md:hidden block">
-              <button
-                className="block md:hidden border border-prihover rounded-md py-2 px-3 bg-indigo-600text-white hover:bg-white hover:text-black"
-                onClick={() => setNavMenu(true)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                )}
+              </div>
+              <div className="md:hidden block">
+                <button
+                  className="block md:hidden border border-prihover rounded-md py-2 px-3 bg-indigo-600text-white hover:bg-white hover:text-black"
+                  onClick={() => setNavMenu(true)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
