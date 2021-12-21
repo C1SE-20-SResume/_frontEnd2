@@ -348,7 +348,7 @@ function Header({ setUserInfo }) {
               onChange={handleSearch}
             />
           </div>
-          <div className="absolute mx-4 mt-1 top-full right-0 left-0 bg-white shadow-lg rounded-md">
+          <div className="absolute mx-4 mt-1 top-full right-0 left-0 bg-white shadow-lg rounded-md z-[999]">
             <ul>
               {resultSearch.length > 0 &&
                 resultSearch.map((item, index) => (
