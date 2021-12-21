@@ -201,7 +201,8 @@ function AddJob({userInfo}) {
                   <label className="block text-sm font-bold mb-2">
                     Keyword
                   </label>
-                  <select
+                  <input type="text" className="w-full p-2 rounded-md" />
+                  {/* <select
                     className="w-full p-2 rounded-md"
                     onChange={(e) =>
                       setListKey(
@@ -300,7 +301,7 @@ function AddJob({userInfo}) {
                     <option value="bootstrap" className="capitalize">
                       bootstrap
                     </option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className="w-5/12 ml-2">
                   <label className="block text-sm font-bold mb-2">Weight</label>
@@ -320,9 +321,6 @@ function AddJob({userInfo}) {
                       console.log(listKey);
                     }}
                   >
-                    <option value="---" className="capitalize">
-                      Weight
-                    </option>
                     {listWeight.map((i) => (
                       <option key={i.id} value={i.id}>
                         {i.name}

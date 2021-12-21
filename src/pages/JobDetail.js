@@ -154,7 +154,7 @@ function JobDetail({role}) {
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-2 text-indigo-600"
+                        className="h-4 w-4 mr-2"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -163,15 +163,17 @@ function JobDetail({role}) {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                         />
                       </svg>
-                      <span className="font-medium">{job.company_name}</span>
+                      <span title="company name" className="font-medium">
+                        {job.company_name}
+                      </span>
                     </div>
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-2 text-red-500"
+                        className="h-4 w-4 mr-2"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -189,7 +191,9 @@ function JobDetail({role}) {
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         />
                       </svg>
-                      <span className="font-medium">{job.job_place}</span>
+                      <span title="place" className="font-medium">
+                        {job.job_place}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -242,7 +246,9 @@ function JobDetail({role}) {
                         d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                       />
                     </svg>
-                    <span className="flex-grow text-center">{job.salary}$</span>
+                    <span title="salary" className="flex-grow text-center">
+                      {job.salary}$
+                    </span>
                   </div>
                   <div className="flex items-center my-3">
                     <svg
@@ -259,7 +265,7 @@ function JobDetail({role}) {
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span className="flex-grow text-center">
+                    <span title="work time" className="flex-grow text-center">
                       {job.work_time === "f" ? "Full-time" : "Part-time"}
                     </span>
                   </div>
@@ -278,13 +284,32 @@ function JobDetail({role}) {
                         d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
                       />
                     </svg>
-                    <span className="flex-grow text-center">
+                    <span title="date update" className="flex-grow text-center">
                       {Math.floor(
                         (new Date() - new Date(job.updated_at)) /
                           (1000 * 60 * 60 * 24)
                       ) +
                         1 +
                         " days ago"}
+                    </span>
+                  </div>
+                  <div className="flex items-center my-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span title="date expire" className="flex-grow text-center">
+                      {job.date_expire}
                     </span>
                   </div>
                 </div>

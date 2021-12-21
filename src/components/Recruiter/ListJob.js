@@ -64,7 +64,7 @@ function ListJob() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setResult(data.data);
+          setResult(data);
           console.log("check dataa", results);
         }
       })
@@ -124,7 +124,7 @@ function ListJob() {
                             : item.job_title}
                         </h3>
                       </div>
-                      <div className="text-sm text-gray-600">
+                      <div className="text-xs text-gray-600">
                         {new Date(item.created_at).toLocaleDateString("vi-VN")}
                       </div>
                     </div>
@@ -150,7 +150,7 @@ function ListJob() {
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                           />
                         </svg>
-                        <span className="text-sm text-gray-600">
+                        <span className="text-xs text-gray-600">
                           {item.job_place}
                         </span>
                       </div>
@@ -169,7 +169,7 @@ function ListJob() {
                             d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                           />
                         </svg>
-                        <span className="text-sm text-gray-600">
+                        <span className="text-xs text-gray-600">
                           {item.salary}
                         </span>
                       </div>
@@ -205,7 +205,7 @@ function ListJob() {
                       bg-red-600
                       text-center "
                   >
-                    <span className="text-sm  block text-white">
+                    <span className="text-xs  block text-white">
                       {item.apply_sum}
                     </span>
                   </div>
@@ -293,7 +293,7 @@ function ListJob() {
                   <thead>
                     <tr>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                        ID
+                        No.
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                         Full name
@@ -308,8 +308,12 @@ function ListJob() {
                         Phone number
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                        email
+                        Email
                       </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        Aplly at
+                      </th>
+
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                         CV file
                       </th>
@@ -320,22 +324,22 @@ function ListJob() {
                         Quiz result
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                        Pass status
+                        Status
                       </th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {results && results.length > 0 ? (
-                      results.map((item, index) => (
+                    {results.data && results.data.length > 0 ? (
+                      results.data.map((item, index) => (
                         <tr key={item.job_id}>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p className="text-gray-900 ">{item.user_id}</p>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs">
+                            <p className="text-gray-900 ">{index + 1}</p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <p className="text-gray-900 "> {item.full_name}</p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                             <p className="text-gray-900 ">
                               {item.gender === "o" ? (
                                 <p className="text-gray-900 ">male</p>
@@ -344,18 +348,23 @@ function ListJob() {
                               )}
                             </p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                             <p className="text-gray-900 ">{item.date_birh}</p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                             <p className="text-gray-900 ">
                               {item.phone_number}
                             </p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <p className="text-gray-900 ">{item.email}</p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
+                            <p className="text-gray-900 ">
+                              {item.apply_updated_at}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <p
                               className="text-gray-900 "
                               onClick={(e) => {
@@ -363,13 +372,21 @@ function ListJob() {
                                 downloadcv(item.cv_file);
                               }}
                             >
-                              {item.cv_file}
+                              {item.cv_file ? (
+                                <button className="p-1 bg-indigo-600 rounded-lg text-white">
+                                  Download
+                                </button>
+                              ) : (
+                                ""
+                              )}
                             </p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
-                            <p className="text-gray-900 ">{item.cv_score}</p>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
+                            <p className="text-gray-900 ">
+                              {item.cv_score + "/" + results.require_score}
+                            </p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <div className="group inline-block relative">
                               <button className="bg-gray-300 cursor-pointer  text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
                                 <span className="mr-1">
@@ -399,7 +416,7 @@ function ListJob() {
                               <div className=" w-max absolute hidden  -top-16 right-1  text-gray-700 z-50 pt-1 group-hover:block">
                                 <div className="flex items-center justify-between">
                                   <div className="px-3 py-3 mx-1 bg-yellow-300 rounded-lg">
-                                    <h3 className="text-center font-bold text-sm whitespace-no-wrap ">
+                                    <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
                                       Aptitude Score
                                     </h3>
                                     <p className="text-gray-700 text-xs font-bold">
@@ -422,7 +439,7 @@ function ListJob() {
                                     </p>
                                   </div>
                                   <div className="px-3 py-3 mx-1 bg-green-400 rounded-lg">
-                                    <h3 className="text-center font-bold text-sm whitespace-no-wrap ">
+                                    <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
                                       Personality Score
                                     </h3>
                                     <p className="text-gray-700 text-xs font-bold">
@@ -460,15 +477,15 @@ function ListJob() {
                               </div>
                             </div>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm ">
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <p className="text-gray-900 ">
                               {item.pass_status == "1" ? (
                                 <p className="text-green-400 font-black">
-                                  PASS
+                                  Prioritized
                                 </p>
                               ) : (
                                 <p className="text-red-500 font-black">
-                                  FAILED
+                                  Not Prioritized
                                 </p>
                               )}
                             </p>
@@ -479,7 +496,7 @@ function ListJob() {
                       <tr className=" w-full bg-gray-50">
                         <td
                           colSpan="10"
-                          className="px-5 py-5 text-center border-b border-gray-200 bg-white text-sm "
+                          className="px-5 py-5 text-center border-b border-gray-200 bg-white text-xs "
                         >
                           <p className="text-gray-900 text-xl font-bold ">
                             NO DATA

@@ -16,7 +16,7 @@ function Header({setUserInfo}) {
   console.log(user);
   useEffect(() => {
     console.log(cookies.user);
-    if (cookies.user !== null) {
+    if (cookies.user && cookies.user !== "") {
       fetch(`${process.env.REACT_APP_API_URL}/login?api_token=${cookies.user}`)
         .then((res) => res.json())
         .then((data) => {
@@ -40,7 +40,9 @@ function Header({setUserInfo}) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          removeCookies("user");
+          removeCookies("user", {path: "/"});
+          setUserInfo({});
+          setUser({});
           window.location.reload();
         }
       })

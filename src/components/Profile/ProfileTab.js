@@ -192,6 +192,9 @@ function ProfileTab({user}) {
                     </span>
                   </td>
                 </tr>
+                <tr className="border">
+                  <table></table>
+                </tr>
                 <tr className="border border-t-0">
                   <td className="px-3 py-2">
                     <span className="font-bold">Personality Score</span>

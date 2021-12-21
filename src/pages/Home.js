@@ -7,11 +7,15 @@ function Home({role, title}) {
   const [loading, setLoading] = useState(false);
   const [currentInfo, setCurrentInfo] = useState([]);
 
+  const onTop = (e) => {
+    e.preventDefault();
+    window.scrollTo(0, 100);
+  };
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 1000);
     fetch(`${process.env.REACT_APP_API_URL}/popularjob`)
       .then((res) => res.json())
       .then((data) => {
@@ -39,7 +43,7 @@ function Home({role, title}) {
         <Loader />
       ) : (
         <main>
-          <section className="py-10  gradient ">
+          <section className="py-10 relative  gradient ">
             <div className="container z-0 mb-5">
               <div className="carousel relative z-0 shadow-2xl bg-white">
                 <div className="carousel-inner relative overflow-hidden w-full">
@@ -175,87 +179,11 @@ function Home({role, title}) {
             <div className="container">
               <div className="text-center mb-6 ">
                 <h2 className="text-2xl mb-4 font-bold">
-                  Latest <span className="text-indigo-600">Jobs</span>
+                  Popular <span className="text-indigo-600">Jobs</span>
                 </h2>
                 <p className="">
                   Here's the most recent job listed on the website.
                 </p>
-              </div>
-              <div className="flex justify-end  items-center ">
-                <div className=" flex shadow-2xl rounded-xl">
-                  <div className="m-4 flex items-center ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 inline-block text-black"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                      />
-                    </svg>
-                    <span className="text-black">
-                      {currentInfo.company_count}
-                    </span>
-                  </div>
-                  <div className="m-4 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 inline-block text-black"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                      />
-                    </svg>
-                    <span className="text-black">{currentInfo.job_count}</span>
-                  </div>
-                  <div className="m-4 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 inline-block text-black"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                    <span className="text-black">{currentInfo.user_count}</span>
-                  </div>
-                  <div className="m-4 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 inline-block text-black "
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-black ">
-                      {currentInfo.apply_count}
-                    </span>
-                  </div>
-                </div>
               </div>
 
               <div className="p-2">
@@ -267,8 +195,8 @@ function Home({role, title}) {
                           <div className="flex items-center">
                             <img
                               src={job.logo_url}
-                              alt=""
-                              className="max-w-[80px] h-auo"
+                              alt="logo company"
+                              className="max-w-[80px] min-h-[80px]"
                             />
                           </div>
                           <div>
@@ -304,7 +232,9 @@ function Home({role, title}) {
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                   />
                                 </svg>
-                                <span className="ml-2">{job.job_place}</span>
+                                <span title="place" className="ml-2">
+                                  {job.job_place}
+                                </span>
                               </span>
                             </li>
                             <li className="p-5">
@@ -323,7 +253,13 @@ function Home({role, title}) {
                                     d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                                   />
                                 </svg>
-                                <span className="ml-2">{job.salary}$</span>
+                                <span
+                                  title="salary"
+                                  title="salary"
+                                  className="ml-2"
+                                >
+                                  {job.salary}$
+                                </span>
                               </span>
                             </li>
                             <li className="p-5">
@@ -342,7 +278,7 @@ function Home({role, title}) {
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                   />
                                 </svg>
-                                <span className="ml-2">
+                                <span title="date expire" className="ml-2">
                                   {
                                     // format date
                                     new Date(
@@ -368,7 +304,9 @@ function Home({role, title}) {
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                   />
                                 </svg>
-                                <span className="ml-2">Full Time</span>
+                                <span title="work time" className="ml-2">
+                                  Full Time
+                                </span>
                               </span>
                             </li>
                             <li className="p-5 ">
@@ -401,7 +339,7 @@ function Home({role, title}) {
 
               <div className="text-center my-6">
                 <Link to="/job">
-                  <button className="py-2 px-6 motion-safe:animate-bounce border-2 text-prihover border-prihover hover:border-prihover hover:bg-prihover hover:text-white transition-all duration-300 rounded-lg uppercase font-semibold">
+                  <button className="py-2 px-6  border-2 text-prihover border-prihover hover:border-prihover hover:bg-prihover hover:text-white transition-all duration-300 rounded-lg uppercase font-semibold">
                     Load More
                   </button>
                 </Link>
@@ -933,6 +871,25 @@ function Home({role, title}) {
               </div>
             </div> */}
           </section>
+          <button
+            onClick={onTop}
+            className="fixed  bottom-52 right-10 rounded-xl p-3 bg-indigo-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 font-bold animate-bounce text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 11l7-7 7 7M5 19l7-7 7 7"
+              />
+            </svg>
+          </button>
         </main>
       )}
     </>

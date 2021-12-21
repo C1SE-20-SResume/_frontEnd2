@@ -73,7 +73,7 @@ function Login() {
         .then((res) => res.json())
         .then((data) => {
           if (data.success && data.api_token) {
-            setCookie("user", data.api_token);
+            setCookie("user", data.api_token, {path: "/"});
             window.location.href = "/";
           } else {
             setMessage(data.message);
