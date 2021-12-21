@@ -5,6 +5,8 @@ function ListJob() {
   const [cookies] = useCookies(["user"]);
 
   const [show, setShow] = useState(false);
+  const [showkey, setShowkey] = useState(false);
+  const [showScore, setScore] = useState(false);
   const [job, setJob] = useState({
     company_name: "",
     listJob: [],
@@ -381,100 +383,182 @@ function ListJob() {
                               )}
                             </p>
                           </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
+                          <td className="px-5 py-5 border-b border-gray-200 relative bg-white text-xs ">
                             <p className="text-gray-900 ">
                               {item.cv_score + "/" + results.require_score}
-                            </p>
-                          </td>
-                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
-                            <div className="group inline-block relative">
-                              <button className="bg-gray-300 cursor-pointer  text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                                <span className="mr-1">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 cursor-pointer "
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                    />
-                                  </svg>
-                                </span>
+                              <button
+                                className="inline-block"
+                                onClick={(e) => setShowkey(true)}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-3 w-3 mx-2 text-indigo-600 cursor-pointer "
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
                               </button>
-
-                              <div className=" w-max absolute hidden  -top-16 right-1  text-gray-700 z-50 pt-1 group-hover:block">
-                                <div className="flex items-center justify-between">
-                                  <div className="px-3 py-3 mx-1 bg-yellow-300 rounded-lg">
-                                    <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
-                                      Aptitude Score
-                                    </h3>
-                                    <p className="text-gray-700 text-xs font-bold">
-                                      {item.aptitude_score[0].type_name} :{" "}
-                                      <span>
-                                        {item.aptitude_score[0].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.aptitude_score[1].type_name} :{" "}
-                                      <span>
-                                        {item.aptitude_score[1].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.aptitude_score[2].type_name} :{" "}
-                                      <span>
-                                        {item.aptitude_score[2].score}
-                                      </span>
-                                    </p>
-                                  </div>
-                                  <div className="px-3 py-3 mx-1 bg-green-400 rounded-lg">
-                                    <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
-                                      Personality Score
-                                    </h3>
-                                    <p className="text-gray-700 text-xs font-bold">
-                                      {item.personality_score[0].type_name} :{" "}
-                                      <span>
-                                        {item.personality_score[0].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.personality_score[1].type_name} :{" "}
-                                      <span>
-                                        {item.personality_score[1].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.personality_score[2].type_name} :{" "}
-                                      <span>
-                                        {item.personality_score[2].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.personality_score[3].type_name} :{" "}
-                                      <span>
-                                        {item.personality_score[3].score}
-                                      </span>
-                                    </p>
-                                    <p className="text-gray-700 text-xs  font-bold">
-                                      {item.personality_score[4].type_name} :{" "}
-                                      <span>
-                                        {item.personality_score[4].score}
-                                      </span>
-                                    </p>
-                                  </div>
+                            </p>
+                            {showkey ? (
+                              <div className="flex absolute bg-gray-100 top-0 w-max shadow-lg  ">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  onClick={(e) => setShowkey(false)}
+                                  className="h-5 w-5 absolute  right-0 z-50 cursor-pointer text-red-500"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <div className="m-1 p-2 bg-green-500 z-30">
+                                  <h3 className="font-bold">
+                                    Keyword was found:
+                                  </h3>
+                                  <span className="text-white">
+                                    {item.keyword_found}
+                                  </span>
+                                </div>
+                                <div className="m-1   p-2 bg-yellow-300 z-30">
+                                  <h3 className="font-bold">
+                                    Keyword not found:
+                                  </h3>
+                                  <span className="text-red-500 font-bold">
+                                    {item.keyword_not_found}
+                                  </span>
                                 </div>
                               </div>
+                            ) : (
+                              ""
+                            )}
+                          </td>
+                          <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
+                            <div className="group flex items-center justify-center  inline-block relative">
+                              <button
+                                onClick={(e) => setScore(true)}
+                                className="   cursor-pointer text-center  text-gray-700 font-semibold    "
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 inline-block text-indigo-600 "
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                                  />
+                                </svg>
+                              </button>
+                              {showScore ? (
+                                <div className=" w-max absolute   -top-16   text-gray-700 z-50 pt-1 group-hover:block">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 absolute cursor-pointer text-red-500 right-0"
+                                    viewBox="0 0 20 20"
+                                    onClick={(e) => setScore(false)}
+                                    fill="currentColor"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                  <div className="flex items-center justify-between">
+                                    <div className="px-3 py-3 mx-1 bg-yellow-300 rounded-lg">
+                                      <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
+                                        Aptitude Score
+                                      </h3>
+                                      <p className="text-gray-700 text-xs font-bold">
+                                        Maths :{" "}
+                                        <span>
+                                          {item.aptitude_graph["maths"]}
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        English :{" "}
+                                        <span>
+                                          {" "}
+                                          {item.aptitude_graph["english"]}
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        Programing :{" "}
+                                        <span>
+                                          {" "}
+                                          {item.aptitude_graph["programing"]}
+                                        </span>
+                                      </p>
+                                    </div>
+                                    <div className="px-3 py-3 mx-1 bg-green-400 rounded-lg">
+                                      <h3 className="text-center font-bold text-xs whitespace-no-wrap ">
+                                        Personality Score
+                                      </h3>
+                                      <p className="text-gray-700 text-xs font-bold">
+                                        agreeableness :{" "}
+                                        <span>
+                                          {
+                                            item.personality_graph[
+                                              "agreeableness"
+                                            ]
+                                          }
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        conscientiousness:{" "}
+                                        <span>
+                                          {
+                                            item.personality_graph[
+                                              "conscientiousness"
+                                            ]
+                                          }
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        extraversion:{" "}
+                                        <span>
+                                          {
+                                            item.personality_graph[
+                                              "extraversion"
+                                            ]
+                                          }
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        neuroticism:{" "}
+                                        <span>
+                                          {
+                                            item.personality_graph[
+                                              "neuroticism"
+                                            ]
+                                          }
+                                        </span>
+                                      </p>
+                                      <p className="text-gray-700 text-xs  font-bold">
+                                        openness :{" "}
+                                        <span>
+                                          {item.personality_graph["openness"]}
+                                        </span>
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                ""
+                              )}
                             </div>
                           </td>
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">

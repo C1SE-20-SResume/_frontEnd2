@@ -7,7 +7,7 @@ import "../Styles/Header.css";
 function Header({setUserInfo}) {
   const [cookies, setCookie, removeCookies] = useCookies(["token"]);
 
-  const [listMenu, setListMenu] = useState(["Home", "Job", "Contact"]);
+  const [listMenu, setListMenu] = useState(["Home", "Job", "About us"]);
 
   const [user, setUser] = useState({});
 
@@ -25,9 +25,9 @@ function Header({setUserInfo}) {
             setUser(data.user_info);
             console.log("check", data);
             if (data.role_level === 0) {
-              setListMenu(["Home", "Job", "Quiz Test", "Contact"]);
+              setListMenu(["Home", "Job", "Quiz Test", "About us"]);
             } else if (data.role_level === 1) {
-              setListMenu(["Home", "Job", "Contact", "For Recruiter"]);
+              setListMenu(["Home", "Job", "About us", "For Recruiter"]);
             }
           }
         })

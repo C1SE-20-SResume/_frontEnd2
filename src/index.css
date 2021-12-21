@@ -22,7 +22,7 @@ body,
 .container,
 .register-container,
 .render-tab-recruiter,
-.menu-func-recruiter {
+.menu-func-recruiter .animationStatistic {
   animation: transitionIn 0.65s;
 }
 @keyframes transitionIn {
@@ -35,6 +35,7 @@ body,
     transform: translateY(0);
   }
 }
+
 .animationForresult {
   animation: trans 1s;
 }

@@ -316,7 +316,7 @@ function JobDetail({role}) {
 
                 {showResult && (
                   <div className="animationForresult w-screen h-screen  relative ">
-                    <div className=" shadow-md animationForresult fixed  w-9/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className=" shadow-md animationForresult fixed  w-3/6 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <div
                         className={`${
                           getresult.cv_pass === 1
@@ -367,19 +367,25 @@ function JobDetail({role}) {
                           </h3>
                         </div>
                         <div className="m-8 w-full">
-                          <div className="text-sm flex justify-between  font-medium text-gray-500">
-                            <p>keywords was found: </p>
-                            <span>{getresult.keyword_found + ""}</span>
+                          <div className="text-sm flex justify-between mb-2  font-medium text-gray-500">
+                            <p>Keywords was found: </p>
+                            <span className="text-xs text-indigo-600">
+                              {getresult.keyword_found.toString() + ""}
+                            </span>
                           </div>
-                          <div className="text-sm flex justify-between   font-medium text-gray-500">
-                            <p>keywords not found:</p>
-                            <span>{getresult.keyword_not_found}</span>
+                          <div className="text-sm  flex flex-wrap justify-between  mb-2  font-medium text-gray-500">
+                            <p>Keywords not found:</p>
+                            <span className="text-xs text-red-500">
+                              {getresult.keyword_not_found.toString()}
+                            </span>
                           </div>
-                          <div className="text-sm flex justify-between   font-medium text-gray-500">
+                          <div className="text-sm flex justify-between mb-2   font-medium text-gray-500">
                             <p>Score :</p>
-                            <span>{getresult.cv_score}</span>
+                            <span className="text-xs">
+                              {getresult.cv_score}
+                            </span>
                           </div>
-                          <div className=" text-sm flex justify-between  font-medium text-gray-500">
+                          <div className=" text-sm flex justify-between mb-2  font-medium text-gray-500">
                             <p>Rank:</p>
                             <span>{getresult.rank}</span>
                           </div>

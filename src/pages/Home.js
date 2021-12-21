@@ -9,7 +9,7 @@ function Home({role, title}) {
 
   const onTop = (e) => {
     e.preventDefault();
-    window.scrollTo(0, 100);
+    window.scrollTo(0, 0);
   };
   useEffect(() => {
     // setLoading(true);
@@ -870,14 +870,98 @@ function Home({role, title}) {
                 </div>
               </div>
             </div> */}
+            <div className="statistic animationStatistic fixed top-1/2 transform bg-white   w-max p-1  shadow-xl rounded-tr-xl rounded-br-xl flex flex-col items-center justify-center ">
+              <div className="">
+                <div className="mb-2 ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-1 text-black  inline-block"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                  <span className="inline-block text-center text-black text-sm">
+                    {currentInfo.company_count}
+                  </span>
+                  <p className="text-xs text-center text-black">Company</p>
+                </div>
+                <div className="mb-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-1 text-black  inline-block"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span className="inline-block text-sm text-black">
+                    {currentInfo.user_count}
+                  </span>
+                  <p className="text-xs text-center text-black">User</p>
+                </div>
+                <div className="mb-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-1 text-black  inline-block"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                    />
+                  </svg>
+                  <span className="inline-block text-sm text-black">
+                    {currentInfo.job_count}
+                  </span>
+                  <p className="text-xs text-center text-black">Jobs</p>
+                </div>
+                <div className="mb-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 mr-1 text-black  inline-block"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                    />
+                  </svg>
+                  <span className="inline-block text-sm text-black">
+                    {currentInfo.apply_count}
+                  </span>
+                  <p className="text-xs text-center text-black">Application</p>
+                </div>
+              </div>
+            </div>
           </section>
           <button
             onClick={onTop}
-            className="fixed  bottom-52 right-10 rounded-xl p-3 bg-indigo-600"
+            className="fixed  bottom-2 right-10 rounded-xl p-3 bg-indigo-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 font-bold animate-bounce text-white"
+              className="h-6 w-6 mr-1 text-white font-bold animate-bounce text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

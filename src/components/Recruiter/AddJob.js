@@ -1,21 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import CreatableSelect from "react-select/creatable";
-import { ActionMeta, OnChangeValue } from "react-select";
-import { useCookies } from "react-cookie";
-import { toast } from "react-toastify";
+import {ActionMeta, OnChangeValue} from "react-select";
+import {useCookies} from "react-cookie";
+import {toast} from "react-toastify";
 
-function AddJob({ userInfo }) {
+function AddJob({userInfo}) {
   const [cookies, setCookie] = useCookies(["user"]);
-  const [user, setUser] = useState({ ...userInfo });
+  const [user, setUser] = useState({...userInfo});
 
   let options = [
     {
       value: "java",
-      label: "Java",
+      label: "java",
     },
     {
-      value: "javascript",
-      label: "Javascript",
+      value: "c",
+      label: "c",
+    },
+    {
+      value: "c#",
+      label: "c#",
+    },
+    {
+      value: "c++",
+      label: "c++",
+    },
+    {
+      value: "dart",
+      label: "dart",
+    },
+    {
+      value: "php",
+      label: "php",
+    },
+    {
+      value: "ruby",
+      label: "ruby",
+    },
+    {
+      value: "python",
+      label: "python",
     },
   ];
 
@@ -39,11 +63,11 @@ function AddJob({ userInfo }) {
   ]);
 
   const [listWeight, setListWeight] = useState([
-    { id: 1, name: "Very Low" },
-    { id: 2, name: "Low" },
-    { id: 3, name: "Medium" },
-    { id: 4, name: "High" },
-    { id: 5, name: "Very High" },
+    {id: 1, name: "Very Low"},
+    {id: 2, name: "Low"},
+    {id: 3, name: "Medium"},
+    {id: 4, name: "High"},
+    {id: 5, name: "Very High"},
   ]);
 
   useEffect(() => {
@@ -60,7 +84,7 @@ function AddJob({ userInfo }) {
       toast.error("You can only add 10 keywords");
       return;
     }
-    setListKey([...listKey, { keyword: "", weight: "" }]);
+    setListKey([...listKey, {keyword: "", weight: ""}]);
   };
 
   const removeKeyword = (index) => {
@@ -120,7 +144,7 @@ function AddJob({ userInfo }) {
               type="text"
               placeholder="Job Title"
               onChange={(e) => {
-                setJob({ ...job, job_title: e.target.value });
+                setJob({...job, job_title: e.target.value});
               }}
             />
           </div>
@@ -132,7 +156,7 @@ function AddJob({ userInfo }) {
               type="text"
               placeholder="Job Require"
               onChange={(e) => {
-                setJob({ ...job, job_require: e.target.value });
+                setJob({...job, job_require: e.target.value});
               }}
             />
           </div>
@@ -145,7 +169,7 @@ function AddJob({ userInfo }) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Job Description"
               onChange={(e) => {
-                setJob({ ...job, job_descrip: e.target.value });
+                setJob({...job, job_descrip: e.target.value});
               }}
             />
           </div>
@@ -157,7 +181,7 @@ function AddJob({ userInfo }) {
               type="text"
               placeholder="Job Benefit"
               onChange={(e) => {
-                setJob({ ...job, job_benefit: e.target.value });
+                setJob({...job, job_benefit: e.target.value});
               }}
             />
           </div>
@@ -169,7 +193,7 @@ function AddJob({ userInfo }) {
               type="text"
               placeholder="Job Place"
               onChange={(e) => {
-                setJob({ ...job, job_place: e.target.value });
+                setJob({...job, job_place: e.target.value});
               }}
             />
           </div>
@@ -177,10 +201,10 @@ function AddJob({ userInfo }) {
             <label className="block text-sm font-bold mb-2">Job Salary</label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder=" Salary (Dollar $$$$)"
+              type="number"
+              placeholder=" Salary (Dollar $)"
               onChange={(e) => {
-                setJob({ ...job, salary: e.target.value });
+                setJob({...job, salary: e.target.value});
               }}
             />
           </div>
@@ -190,7 +214,7 @@ function AddJob({ userInfo }) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="date"
               onChange={(e) => {
-                setJob({ ...job, date_expire: e.target.value });
+                setJob({...job, date_expire: e.target.value});
               }}
             />
           </div>
@@ -200,7 +224,7 @@ function AddJob({ userInfo }) {
               className="w-full p-2 rounded-md"
               onChange={(e) => {
                 console.log();
-                setJob({ ...job, work_time: e.target.value });
+                setJob({...job, work_time: e.target.value});
               }}
             >
               <option value="f">Full Time</option>
@@ -219,7 +243,7 @@ function AddJob({ userInfo }) {
                       setListKey(
                         listKey.map((item, i) => {
                           if (index === i) {
-                            return { ...item, keyword: newValue.value };
+                            return {...item, keyword: newValue.value};
                           }
                           return item;
                         })

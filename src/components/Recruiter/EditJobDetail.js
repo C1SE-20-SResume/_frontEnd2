@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useCookies} from "react-cookie";
-
+import CreatableSelect from "react-select/creatable";
+import {ActionMeta, OnChangeValue} from "react-select";
 function EditJobDetail({setShowDetail, id}) {
   const [cookies, setCookie] = useCookies(["user"]);
 
@@ -12,7 +13,40 @@ function EditJobDetail({setShowDetail, id}) {
       weight: "",
     },
   ]);
-
+  let options = [
+    {
+      value: "java",
+      label: "java",
+    },
+    {
+      value: "c",
+      label: "c",
+    },
+    {
+      value: "c#",
+      label: "c#",
+    },
+    {
+      value: "c++",
+      label: "c++",
+    },
+    {
+      value: "dart",
+      label: "dart",
+    },
+    {
+      value: "php",
+      label: "php",
+    },
+    {
+      value: "ruby",
+      label: "ruby",
+    },
+    {
+      value: "python",
+      label: "python",
+    },
+  ];
   const [listWeight] = useState([
     {id: 1, name: "Very Low"},
     {id: 2, name: "Low"},
@@ -219,7 +253,24 @@ function EditJobDetail({setShowDetail, id}) {
                     <label className="block text-sm font-bold mb-2">
                       Keyword
                     </label>
-                    <select
+                    <CreatableSelect
+                      onChange={(newValue, acitonMeta) => {
+                        setListKey(
+                          listKey.map((item, i) => {
+                            if (index === i) {
+                              return {...item, keyword: newValue.value};
+                            }
+                            return item;
+                          })
+                        );
+                      }}
+                      value={{
+                        value: `${item.keyword}`,
+                        label: `${item.keyword}`,
+                      }}
+                      options={options}
+                    />
+                    {/* <select
                       className="w-full p-2 rounded-md capitalize"
                       name="keyword"
                       onChange={(e) =>
@@ -322,7 +373,7 @@ function EditJobDetail({setShowDetail, id}) {
                       <option value="bootstrap" className="capitalize">
                         bootstrap
                       </option>
-                    </select>
+                    </select> */}
                   </div>
                   <div className="w-1/3 ml-2">
                     <label className="block text-sm font-bold mb-2">
