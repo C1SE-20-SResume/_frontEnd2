@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useRef} from "react";
-import {useCookies} from "react-cookie";
-import {Link, NavLink} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import "../Styles/Header.css";
 
-function Header({setUserInfo}) {
+function Header({ setUserInfo }) {
   const [cookies, setCookie, removeCookies] = useCookies(["token"]);
 
   const [listMenu, setListMenu] = useState(["Home", "Job", "About us"]);
@@ -40,7 +40,7 @@ function Header({setUserInfo}) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          removeCookies("user", {path: "/"});
+          removeCookies("user", { path: "/" });
           setUserInfo({});
           setUser({});
           window.location.reload();
@@ -78,6 +78,7 @@ function Header({setUserInfo}) {
 
   const handleSearch = (e) => {
     e.preventDefault();
+
     const search = e.target.value;
     if (search === "") {
       setResultSearch([]);
@@ -85,14 +86,28 @@ function Header({setUserInfo}) {
       let result = dataSearch.filter((item) => {
         return item.job_title.toLowerCase().includes(search.toLowerCase());
       });
-      if (result.length === 0) {
+      if (result.length === 0)
         result = dataSearch.filter((item) => {
           return item.company_name.toLowerCase().includes(search.toLowerCase());
         });
-      }
+
+      if (result.length === 0)
+        result = dataSearch.filter((item) => {
+          return item.job_place.toLowerCase().includes(search.toLowerCase());
+        });
+
       setResultSearch(result);
     }
   };
+
+  useEffect(() => {
+    // when click outsite input id search and ref theSearch
+    document.addEventListener("click", (e) => {
+      if (e.target.id !== "search" && e.target !== theSearch.current) {
+        theSearch.current.classList.add("hidden");
+      }
+    });
+  }, []);
 
   return (
     <header>
@@ -348,6 +363,7 @@ function Header({setUserInfo}) {
               id="search"
               placeholder="Search something.."
               onChange={handleSearch}
+              onFocus={() => theSearch.current.classList.remove("hidden")}
             />
           </div>
           <div
