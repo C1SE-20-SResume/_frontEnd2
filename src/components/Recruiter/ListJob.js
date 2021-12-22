@@ -6,7 +6,9 @@ function ListJob() {
 
   const [show, setShow] = useState(false);
   const [showkey, setShowkey] = useState(false);
+  const [numberKey, setNumberKey] = useState(null);
   const [showScore, setScore] = useState(false);
+  const [numberScore, setNumberScore] = useState(null);
   const [job, setJob] = useState({
     company_name: "",
     listJob: [],
@@ -443,7 +445,10 @@ function ListJob() {
                               {item.cv_score + "/" + results.require_score}
                               <button
                                 className="inline-block"
-                                onClick={(e) => setShowkey(true)}
+                                onClick={() => {
+                                  setShowkey(true);
+                                  setNumberKey(index);
+                                }}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -460,7 +465,7 @@ function ListJob() {
                                 </svg>
                               </button>
                             </p>
-                            {showkey ? (
+                            {showkey && index === numberKey ? (
                               <div className="flex menu-func-recruiter  absolute bg-gray-100 top-0 w-max shadow-lg  ">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -499,7 +504,10 @@ function ListJob() {
                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-xs ">
                             <div className="group flex items-center justify-center  inline-block relative">
                               <button
-                                onClick={(e) => setScore(true)}
+                                onClick={(e) => {
+                                  setScore(true);
+                                  setNumberScore(index);
+                                }}
                                 className="   cursor-pointer text-center  text-gray-700 font-semibold    "
                               >
                                 <svg
@@ -517,7 +525,7 @@ function ListJob() {
                                   />
                                 </svg>
                               </button>
-                              {showScore ? (
+                              {showScore && index === numberScore ? (
                                 <div className=" w-max absolute   -top-16   text-gray-700 z-50 pt-1 group-hover:block">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"

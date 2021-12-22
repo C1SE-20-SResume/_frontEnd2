@@ -99,14 +99,14 @@ function Header({ setUserInfo }) {
       setResultSearch(result);
     }
   };
-
   useEffect(() => {
     // when click outsite input id search and ref theSearch
-    document.addEventListener("click", (e) => {
-      if (e.target.id !== "search" && e.target !== theSearch.current) {
-        theSearch.current.classList.add("hidden");
-      }
-    });
+    if (theSearch)
+      document.addEventListener("click", (e) => {
+        if (e.target.id !== "search" && e.target !== theSearch.current) {
+          theSearch.current.classList.add("hidden");
+        }
+      });
   }, []);
 
   return (
