@@ -233,7 +233,7 @@ function Home({role, title}) {
                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                   />
                                 </svg>
-                                <span title="place" className="ml-2">
+                                <span title="Place" className="ml-2">
                                   {job.job_place}
                                 </span>
                               </span>
@@ -255,8 +255,8 @@ function Home({role, title}) {
                                   />
                                 </svg>
                                 <span
-                                  title="salary"
-                                  title="salary"
+                                  title="Salary"
+                                 
                                   className="ml-2"
                                 >
                                   {job.salary}$
@@ -279,7 +279,7 @@ function Home({role, title}) {
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                   />
                                 </svg>
-                                <span title="date expire" className="ml-2">
+                                <span title="Date expire" className="ml-2">
                                   {
                                     // format date
                                     new Date(
@@ -305,7 +305,7 @@ function Home({role, title}) {
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                   />
                                 </svg>
-                                <span title="work time" className="ml-2">
+                                <span title="Work time" className="ml-2">
                                   {job.work_time === "f"
                                     ? "Full time"
                                     : "Part time"}

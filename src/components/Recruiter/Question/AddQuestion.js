@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useCookies} from "react-cookie";
-
+import {toast} from "react-toastify";
 function AddQuestion({userInfo}) {
   const [cookies, setCookie] = useCookies(["user"]);
   const [user, setUser] = useState({...userInfo});
@@ -82,9 +82,10 @@ function AddQuestion({userInfo}) {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          alert("Add question success");
+          toast.success("Add question success");
           window.location.reload();
         } else {
+          toast.error("Add question failed");
         }
       })
       .catch((err) => {

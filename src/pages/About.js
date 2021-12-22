@@ -30,7 +30,7 @@ function About() {
                               #SRESUME 2022
                             </div>
                             <div className="font-black text-gray-100 text-2xl tracking-wide mb-10">
-                              Create an account for only 5$ a month
+                              {/* Create an account for only 5$ a month */}
                             </div>
                           </div>
                           <div className="px-8 py-6 relative">
@@ -101,19 +101,19 @@ function About() {
                             About SRESUME
                           </div>
                           <div className="mt-6 text-sm text-gray-600">
-                            sresume is a website that allows employers to post
+                            SResume is a website that allows employers to post
                             information about looking for personnel for their
                             company. Through the quiz test score, the employer
                             will know if the person's personality and skills are
                             needed in the company's department. you or not.
                           </div>
                           <div className="mt-6">
-                            <a
+                            {/* <a
                               href="#"
                               className="uppercase font-bold border-b-2 text-indigo-500 border-indigo-200 hover:border-indigo-500 hover:text-indigo-600"
                             >
                               Learn More
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                       </div>

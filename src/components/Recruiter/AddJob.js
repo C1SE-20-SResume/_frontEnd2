@@ -131,7 +131,7 @@ function AddJob({userInfo}) {
           });
           console.log(job);
         } else {
-          toast.error("check value input");
+          toast.error("Please fill all  input field");
         }
       })
       .catch((err) => {

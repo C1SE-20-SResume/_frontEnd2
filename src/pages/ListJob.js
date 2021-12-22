@@ -63,14 +63,20 @@ function ListJob({role, title}) {
                               </div>
                               <div>
                                 <h4
-                                // limit the length of character
+                                  title={job.job_title}
+                                  // limit the length of character
                                 >
                                   {/* {job.job_title.length > 20
                                     ? job.job_title.substring(0, 20) + "..."
                                     : job.job_title} */}
                                   {job.job_title}
                                 </h4>
-                                <p className="font-bold">{job.company_name}</p>
+                                <p
+                                  className="font-bold"
+                                  title={job.company_name}
+                                >
+                                  {job.company_name}
+                                </p>
                                 <ul className="flex items-center">
                                   <li className="p-5 pl-0">
                                     <span className="flex items-center">
@@ -149,12 +155,35 @@ function ListJob({role, title}) {
                                       </span>
                                     </span>
                                   </li>
+                                  <li className="p-5">
+                                    <span className="flex items-center">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                      </svg>
+                                      <span title="Work time" className="ml-2">
+                                        {job.work_time === "f"
+                                          ? "Full time"
+                                          : "Part time"}
+                                      </span>
+                                    </span>
+                                  </li>
                                 </ul>
                               </div>
                               <ul>
                                 <li className="p-5 pb-0">
                                   <span className="flex items-center">
-                                    <svg
+                                    {/* <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       className="h-4 w-4"
                                       fill="none"
@@ -167,12 +196,12 @@ function ListJob({role, title}) {
                                         strokeWidth={2}
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                       />
-                                    </svg>
-                                    <span title="Work time" className="ml-2">
+                                    </svg> */}
+                                    {/* <span title="Work time" className="ml-2">
                                       {job.work_time === "f"
                                         ? "Full time"
                                         : "Part time"}
-                                    </span>
+                                    </span> */}
                                   </span>
                                 </li>
                                 <li className="p-5">
