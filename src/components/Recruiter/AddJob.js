@@ -117,6 +117,19 @@ function AddJob({userInfo}) {
       .then((data) => {
         if (data.success) {
           toast.success(data.message);
+
+          setJob({
+            job_title: "",
+            job_descrip: "",
+            job_require: "",
+            job_benefit: "",
+            job_place: "",
+            salary: "",
+            date_expire: "",
+            job_keyword: [],
+            work_time: "f",
+          });
+          console.log(job);
         } else {
           toast.error("check value input");
         }
@@ -143,6 +156,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Title"
+              value={job.job_title}
               onChange={(e) => {
                 setJob({...job, job_title: e.target.value});
               }}
@@ -154,6 +168,7 @@ function AddJob({userInfo}) {
               rows={5}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
+              value={job.job_require}
               placeholder="Job Require"
               onChange={(e) => {
                 setJob({...job, job_require: e.target.value});
@@ -168,6 +183,7 @@ function AddJob({userInfo}) {
               rows={10}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Job Description"
+              value={job.job_descrip}
               onChange={(e) => {
                 setJob({...job, job_descrip: e.target.value});
               }}
@@ -180,6 +196,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Benefit"
+              value={job.job_benefit}
               onChange={(e) => {
                 setJob({...job, job_benefit: e.target.value});
               }}
@@ -192,6 +209,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Job Place"
+              value={job.job_place}
               onChange={(e) => {
                 setJob({...job, job_place: e.target.value});
               }}
@@ -203,6 +221,7 @@ function AddJob({userInfo}) {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="number"
               placeholder=" Salary (Dollar $)"
+              value={job.salary}
               onChange={(e) => {
                 setJob({...job, salary: e.target.value});
               }}
@@ -213,6 +232,7 @@ function AddJob({userInfo}) {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="date"
+              value={job.date_expire}
               onChange={(e) => {
                 setJob({...job, date_expire: e.target.value});
               }}
@@ -222,6 +242,7 @@ function AddJob({userInfo}) {
             <label className="block text-sm font-bold mb-2">Work Time</label>
             <select
               className="w-full p-2 rounded-md"
+              value={job.work_time}
               onChange={(e) => {
                 console.log();
                 setJob({...job, work_time: e.target.value});

@@ -4,7 +4,8 @@ import {useCookies} from "react-cookie";
 function ProfileTab({user}) {
   const [cookies, setCookie] = useCookies(["user"]);
   const {register, handleSubmit, errors} = useForm();
-
+  const [showApti, setShowApti] = useState(false);
+  const [showPer, setShowper] = useState(false);
   const onSubmit = (data) => {
     console.log(data);
 
@@ -34,7 +35,7 @@ function ProfileTab({user}) {
   };
 
   return (
-    <div className=" m-2 menu-func-recruiter ">
+    <div className=" relative m-2 menu-func-recruiter ">
       <h2 className="text-xl mb-4">
         <span className="font-bold">Profile</span>
       </h2>
@@ -180,7 +181,7 @@ function ProfileTab({user}) {
                   <td className="px-3 py-2">
                     <span className="font-bold">Aptitude Score</span>
                   </td>
-                  <td className="text-center">
+                  <td className="text-right relative">
                     <span
                       className={`${
                         !user.info.aptitude_score && "text-red-500"
@@ -190,16 +191,83 @@ function ProfileTab({user}) {
                         ? user.info.aptitude_score
                         : NaN}
                     </span>
+                    {showApti ? (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 inline-block p-1 cursor-pointer text-red-500"
+                          fill="none"
+                          onClick={(e) => setShowApti(false)}
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                          />
+                        </svg>
+                        <table className="w-full absolute -top-24 rounded-xl bg-gray-300 text-center table-collapse">
+                          <thead>
+                            <tr>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                Maths
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                English
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                Programing
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="align-baseline text-center">
+                            <tr className="group text-center cursor-pointer hover:bg-grey-lightest">
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.aptitude_graph["maths"]}
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.aptitude_graph["english"]}
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.aptitude_graph["programing"]}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 inline-block p-1 cursor-pointer text-indigo-600"
+                        fill="none"
+                        onClick={(e) => setShowApti(true)}
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                    )}
                   </td>
                 </tr>
-                <tr className="border">
-                  <table></table>
-                </tr>
+
                 <tr className="border border-t-0">
                   <td className="px-3 py-2">
                     <span className="font-bold">Personality Score</span>
                   </td>
-                  <td className="text-center">
+                  <td className="text-right relative">
                     <span
                       className={`${
                         !user.info.personality_score && "text-red-500"
@@ -209,6 +277,91 @@ function ProfileTab({user}) {
                         ? user.info.personality_score
                         : NaN}
                     </span>
+                    {showPer ? (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 inline-block p-1 cursor-pointer text-red-500"
+                          fill="none"
+                          onClick={(e) => setShowper(false)}
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                          />
+                        </svg>
+                        <table className="w-full absolute -bot-24 -right-12  rounded-xl bg-gray-300 text-center table-collapse">
+                          <thead>
+                            <tr>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                openness
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                conscientiousness
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                extraversion
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                agreeableness
+                              </th>
+                              <th className="text-sm text-center text-left uppercase font-semibold text-grey-darker p-3 bg-grey-light">
+                                neuroticism
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="align-baseline text-center">
+                            <tr className="group text-center cursor-pointer hover:bg-grey-lightest">
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.personality_graph["openness"]}
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {
+                                  user.info.personality_graph[
+                                    "conscientiousness"
+                                  ]
+                                }
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.personality_graph["extraversion"]}
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.personality_graph["agreeableness"]}
+                              </td>
+                              <td className="text-sm text-center p-3 border-t border-grey-light whitespace-no-wrap">
+                                {user.info.personality_graph["neuroticism"]}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 inline-block p-1 cursor-pointer text-indigo-600"
+                        fill="none"
+                        onClick={(e) => setShowper(true)}
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                    )}
                   </td>
                 </tr>
               </tbody>

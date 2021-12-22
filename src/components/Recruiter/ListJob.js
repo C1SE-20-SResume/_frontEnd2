@@ -111,7 +111,7 @@ function ListJob() {
         {job.listJob && job.listJob.length > 0 ? (
           job.listJob.map(
             (item, index) =>
-              index >= page.min &&
+              index + 1 >= page.min &&
               index <= page.max && (
                 <div key={index} className="col-span-1 relative ">
                   <div
@@ -291,7 +291,7 @@ function ListJob() {
             </div>
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
               <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
-                <table className=" menu-func-recruiter min-w-full leading-normal  transition ease-in-out delay-1000">
+                <table className=" menu-func-recruiter z-0 min-w-full  leading-normal  transition ease-in-out delay-1000">
                   <thead>
                     <tr>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
@@ -406,7 +406,7 @@ function ListJob() {
                               </button>
                             </p>
                             {showkey ? (
-                              <div className="flex absolute bg-gray-100 top-0 w-max shadow-lg  ">
+                              <div className="flex menu-func-recruiter  absolute bg-gray-100 top-0 w-max shadow-lg  ">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   onClick={(e) => setShowkey(false)}
@@ -420,7 +420,7 @@ function ListJob() {
                                     clipRule="evenodd"
                                   />
                                 </svg>
-                                <div className="m-1 p-2 bg-green-500 z-30">
+                                <div className="m-1  p-2 rounded-lg w-44 overflow-x-scroll flex-wrap  bg-green-500 z-30">
                                   <h3 className="font-bold">
                                     Keyword was found:
                                   </h3>
@@ -428,7 +428,7 @@ function ListJob() {
                                     {item.keyword_found}
                                   </span>
                                 </div>
-                                <div className="m-1   p-2 bg-yellow-300 z-30">
+                                <div className="m-1   p-2 rounded-lg w-44 overflow-x-scroll bg-yellow-300 z-30">
                                   <h3 className="font-bold">
                                     Keyword not found:
                                   </h3>

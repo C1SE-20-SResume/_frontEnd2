@@ -12,10 +12,10 @@ function Home({role, title}) {
     window.scrollTo(0, 0);
   };
   useEffect(() => {
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 1000);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
     fetch(`${process.env.REACT_APP_API_URL}/popularjob`)
       .then((res) => res.json())
       .then((data) => {

@@ -94,7 +94,8 @@ function ListQuestion() {
             </thead>
             <tbody className="">
               {option === "aptitude"
-                ? aptitude.map((item, index) => (
+                ? aptitude &&
+                  aptitude.map((item, index) => (
                     <tr key={index}>
                       <td className="border px-4 py-2 capitalize">
                         {item.type_name}
@@ -144,7 +145,8 @@ function ListQuestion() {
                       </td>
                     </tr>
                   ))
-                : personality.map((item, index) => (
+                : personality &&
+                  personality.map((item, index) => (
                     <tr key={index}>
                       <td className="border px-4 py-2 capitalize">
                         {item.type_name}

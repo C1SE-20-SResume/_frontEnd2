@@ -9,7 +9,8 @@ function ListJob({role, title}) {
     max: 10,
     limit: 10,
   });
-
+  // var newarr = listJob.slice().reverse();
+  // console.log("check", newarr);
   useEffect(() => {
     window.scrollTo(0, 0);
     fetch(`${process.env.REACT_APP_API_URL}/job`)
@@ -39,12 +40,13 @@ function ListJob({role, title}) {
               with the right freelancers.
             </p>
           </div>
+
           <div className="flex">
             {/* <div className="md:w-1/4 w-full"></div> */}
             <div className="w-full">
               <div className="p-6 ml-6">
                 {listJob.length > 0 &&
-                  listJob.map((job, index) => {
+                  [...listJob].reverse().map((job, index) => {
                     // show to 10 job per page
                     return (
                       index < perPage.max &&
@@ -193,7 +195,7 @@ function ListJob({role, title}) {
                       )
                     );
                   })}
-                {listJob.length > 0 && (
+                {listJob.length > 1 && (
                   <nav>
                     <ul className="w-full flex justify-center">
                       {
