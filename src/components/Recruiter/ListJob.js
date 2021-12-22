@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import React, {useState, useEffect} from "react";
+import {useCookies} from "react-cookie";
 
 function ListJob() {
   const [cookies] = useCookies(["user"]);
@@ -340,7 +340,7 @@ function ListJob() {
                               setDecs(1);
                             }
 
-                            setResult((prev) => ({ ...prev, data: newResul }));
+                            setResult((prev) => ({...prev, data: newResul}));
                           }}
                         >
                           Score

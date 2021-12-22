@@ -51,7 +51,9 @@ body,
 .bg-facebook {
   background-color: #3b5998;
 }
-
+.father:hover .child {
+  display: block;
+}
 .bg-twitter {
   background-color: #1da1f2;
 }

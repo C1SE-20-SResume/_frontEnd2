@@ -5,8 +5,8 @@ function ListJob({role, title}) {
   const [listJob, setListJob] = useState([]);
 
   const [perPage, setPerPage] = useState({
-    min: 1,
-    max: 10,
+    min: 0,
+    max: 5,
     limit: 10,
   });
   // var newarr = listJob.slice().reverse();

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useCookies } from "react-cookie";
-import { Link, NavLink } from "react-router-dom";
+import React, {useState, useEffect, useRef} from "react";
+import {useCookies} from "react-cookie";
+import {Link, NavLink} from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import "../Styles/Header.css";
 
-function Header({ setUserInfo }) {
+function Header({setUserInfo}) {
   const [cookies, setCookie, removeCookies] = useCookies(["token"]);
 
   const [listMenu, setListMenu] = useState(["Home", "Job", "About us"]);
@@ -40,7 +40,7 @@ function Header({ setUserInfo }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          removeCookies("user", { path: "/" });
+          removeCookies("user", {path: "/"});
           setUserInfo({});
           setUser({});
           window.location.reload();
