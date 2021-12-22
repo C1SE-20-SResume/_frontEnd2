@@ -19,7 +19,7 @@ import {
 import {Login, Register} from "./auth";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import About from "./pages/About";
 
 function App() {
   const [cookies] = useCookies(["user"]);
@@ -54,6 +54,9 @@ function App() {
                 </Route>
                 <Route exact path="/job">
                   <ListJob role={userInfo.role_level} title="Job List" />
+                </Route>
+                <Route exact path="/about-us">
+                  <About title="About us" />
                 </Route>
 
                 {cookies.user && (

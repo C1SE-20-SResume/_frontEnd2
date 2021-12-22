@@ -47,7 +47,13 @@ function Footer() {
                       href="#"
                       className="text-gray-400 py-1 block hover:underline"
                     >
-                      Dam Duc Manh
+                      Dam Phuoc Manh
+                    </span>
+                    <span
+                      href="#"
+                      className="text-gray-400 py-1 block hover:underline"
+                    >
+                      Ngo V. Lam Truong
                     </span>
                   </div>
                 </div>
@@ -80,7 +86,7 @@ function Footer() {
                 href="#"
                 className="text-gray-400 py-1 block hover:underline"
               >
-                Da Nang: (+84) 966529474 <br /> Email: sresume@cvtojob.tk
+                Hotline: (+84) 123 456 789 <br /> Email: sresume@cvtojob.tk
               </span>
             </div>
           </div>

@@ -181,9 +181,7 @@ function Home({role, title}) {
                 <h2 className="text-2xl mb-4 font-bold">
                   Popular <span className="text-indigo-600">Jobs</span>
                 </h2>
-                <p className="">
-                  Here's the most recent job listed on the website.
-                </p>
+                <p className="">Jobs that many people are interested in</p>
               </div>
 
               <div className="p-2">
@@ -201,13 +199,16 @@ function Home({role, title}) {
                           </div>
                           <div>
                             <h4
-                            // limit the length of character
+                              title={job.job_title}
+                              // limit the length of character
                             >
                               {job.job_title.length > 20
                                 ? job.job_title.substring(0, 20) + "..."
                                 : job.job_title}
                             </h4>
-                            <p className="font-bold">{job.company_name}</p>
+                            <p className="font-bold" title={job.company_name}>
+                              {job.company_name}
+                            </p>
                           </div>
                           <ul className="flex items-center">
                             <li className="p-5 ">
@@ -305,7 +306,9 @@ function Home({role, title}) {
                                   />
                                 </svg>
                                 <span title="work time" className="ml-2">
-                                  Full Time
+                                  {job.work_time === "f"
+                                    ? "Full time"
+                                    : "Part time"}
                                 </span>
                               </span>
                             </li>

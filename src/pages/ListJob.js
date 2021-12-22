@@ -65,9 +65,10 @@ function ListJob({role, title}) {
                                 <h4
                                 // limit the length of character
                                 >
-                                  {job.job_title.length > 20
+                                  {/* {job.job_title.length > 20
                                     ? job.job_title.substring(0, 20) + "..."
-                                    : job.job_title}
+                                    : job.job_title} */}
+                                  {job.job_title}
                                 </h4>
                                 <p className="font-bold">{job.company_name}</p>
                                 <ul className="flex items-center">
@@ -93,7 +94,7 @@ function ListJob({role, title}) {
                                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                         />
                                       </svg>
-                                      <span className="ml-2">
+                                      <span className="ml-2" title="Place">
                                         {job.job_place}
                                       </span>
                                     </span>
@@ -114,7 +115,7 @@ function ListJob({role, title}) {
                                           d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
                                         />
                                       </svg>
-                                      <span className="ml-2">
+                                      <span className="ml-2" title="Salary">
                                         {job.salary}$
                                       </span>
                                     </span>
@@ -135,7 +136,10 @@ function ListJob({role, title}) {
                                           d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                         />
                                       </svg>
-                                      <span className="ml-2">
+                                      <span
+                                        className="ml-2"
+                                        title="Date expire"
+                                      >
                                         {
                                           // format date
                                           new Date(
@@ -164,7 +168,11 @@ function ListJob({role, title}) {
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                                       />
                                     </svg>
-                                    <span className="ml-2">Full Time</span>
+                                    <span title="Work time" className="ml-2">
+                                      {job.work_time === "f"
+                                        ? "Full time"
+                                        : "Part time"}
+                                    </span>
                                   </span>
                                 </li>
                                 <li className="p-5">
