@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {useCookies} from "react-cookie";
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 function ListJob() {
   const [cookies] = useCookies(["user"]);
@@ -18,7 +18,7 @@ function ListJob() {
     max: 9,
     current: 1,
   });
-
+  const [decs, setDecs] = useState(1);
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_API_URL}/recruiter/apply?api_token=${cookies.user}`
@@ -272,7 +272,7 @@ function ListJob() {
       </div>
       {show && (
         <div className=" fixed overflow-y-scroll scrollbar-hide   top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen   mx-auto px-4 sm:px-8 backdrop-blur-xl ">
-          <div className="py-8">
+          <div className="pt-20">
             <div className="flex justify-end">
               <button onClick={() => setShow(false)} className="block">
                 <svg
@@ -319,8 +319,63 @@ function ListJob() {
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                         CV file
                       </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                        Score
+                      <th className="border-b-2 border-gray-200 bg-gray-100 tracking-wider">
+                        <button
+                          className="flex items-center text-xs font-bold text-gray-700 uppercase text-left px-5 py-3"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // sort result.data by cv_score
+                            let newResul;
+                            if (decs === 1) {
+                              newResul = results.data.sort((a, b) => {
+                                return b.cv_score - a.cv_score;
+                              });
+                              setDecs(0);
+                            } else {
+                              newResul = results.data.sort((a, b) => {
+                                return a.cv_score - b.cv_score;
+                              });
+                              setDecs(1);
+                            }
+
+                            setResult((prev) => ({ ...prev, data: newResul }));
+                          }}
+                        >
+                          Score
+                          <span>
+                            {decs === 0 ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M5 15l7-7 7 7"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M19 9l-7 7-7-7"
+                                />
+                              </svg>
+                            )}
+                          </span>
+                        </button>
                       </th>
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                         Quiz result
