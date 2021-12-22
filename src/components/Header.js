@@ -101,12 +101,16 @@ function Header({setUserInfo}) {
   };
   useEffect(() => {
     // when click outsite input id search and ref theSearch
-    if (theSearch)
-      document.addEventListener("click", (e) => {
-        if (e.target.id !== "search" && e.target !== theSearch.current) {
-          theSearch.current.classList.add("hidden");
-        }
-      });
+
+    document.addEventListener("click", (e) => {
+      if (
+        e.target.id !== "search" &&
+        e.target !== theSearch.current &&
+        theSearch.current !== null
+      ) {
+        theSearch.current.classList.add("hidden");
+      }
+    });
   }, []);
 
   return (
